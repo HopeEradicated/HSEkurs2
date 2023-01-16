@@ -6,10 +6,10 @@ public class PlayerMovements : MonoBehaviour
     Transform playerCoords;
     Rigidbody2D playerRb;
 
-    private float vForce = 500f/*Мб поменять название*/, hForce = 2f, plSpeed = 6f;
+    private float vForce = 450f/*Мб поменять название*/, hForce = 2f, plSpeed = 6f;
     private float hDirection = 0f, wallDirIndex = -0.1f;
     private float wallCheckDist = 2f;
-    private bool canMove, canJump, isOnWall;
+    private bool canJump, isOnWall;
 
     private void Start() {
         playerCoords = GetComponent<Transform>();
@@ -18,7 +18,7 @@ public class PlayerMovements : MonoBehaviour
 
     private void Update() {
         if (canJump){
-            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space)){
+            if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space)) && !Input.GetKey(KeyCode.S)){
                 Jump();
                 canJump = false;
             } else if (isOnWall){
@@ -48,6 +48,7 @@ public class PlayerMovements : MonoBehaviour
     }
 
     private void FixedUpdate() {
+        //Переписать, чтобы игрок мог спрыгивать со стен
         Physics2D.queriesStartInColliders = false;
         if (Physics2D.Raycast(transform.position, Vector2.right * transform.localScale.x, wallCheckDist).collider != null && hDirection == -1) {
             playerRb.velocity = new Vector2(hDirection, playerRb.velocity.y);
@@ -72,21 +73,27 @@ public class PlayerMovements : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        if (other.gameObject.tag == "Ground" && (!canMove || !canJump)){
-            canJump = true;
-        }
+        canJump = true;
     }
 
     private void OnCollisionStay2D(Collision2D other) {
         if (other.gameObject.tag == "Wall"){
-            canJump = true;
             isOnWall = true;
+        } else if (Input.GetKey(KeyCode.S)) {
+            //Реализовываем механику спрыгивания с платформы
+            other.gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
         }
     }
 
     private void OnCollisionExit2D(Collision2D other) {
         if (other.gameObject.tag == "Wall"){
             isOnWall = false;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other) {
+        if (other.gameObject.tag != "triggerPlatform"){
+            other.gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
         }
     }
 }

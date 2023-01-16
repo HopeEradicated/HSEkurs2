@@ -5,9 +5,10 @@ using UnityEngine;
 public class RoomGenerator : MonoBehaviour
 {
     private RoomVariants variants;
-    private bool spawned = false;
     private int rand;
-    private float waitTime = 3f;
+    private float waitTime = 1f;
+    public bool spawned = false;
+    static int counter = 0;
 
     public Direction direction;
     public enum Direction{
@@ -25,27 +26,40 @@ public class RoomGenerator : MonoBehaviour
    }
 
    public void Spawn() {
-    if(!spawned) {
+    if(!spawned && counter < 15) {
         if (direction == Direction.Top ){
             rand = Random.Range(0, variants.topRooms.Count);
-            Instantiate(variants.topRooms[rand], transform.position, variants.topRooms[rand].transform.rotation);
+            GameObject newRoom = Instantiate(variants.topRooms[rand], transform.position, variants.topRooms[rand].transform.rotation);
+            newRoom.transform.SetParent(gameObject.transform.parent);
+            counter++;
         } else if (direction == Direction.Right) {
             rand = Random.Range(0, variants.rightRooms.Count);
-            Instantiate(variants.rightRooms[rand], transform.position, variants.rightRooms[rand].transform.rotation);
+            GameObject newRoom = Instantiate(variants.rightRooms[rand], transform.position, variants.rightRooms[rand].transform.rotation);
+            newRoom.transform.SetParent(gameObject.transform.parent);
+            counter++;
         } else if (direction == Direction.Left) {
             rand = Random.Range(0, variants.leftRooms.Count);
-            Instantiate(variants.leftRooms[rand], transform.position, variants.leftRooms[rand].transform.rotation);
+            GameObject newRoom = Instantiate(variants.leftRooms[rand], transform.position, variants.leftRooms[rand].transform.rotation);
+            newRoom.transform.SetParent(gameObject.transform.parent);
+            counter++;
         } else if (direction == Direction.Bottom) {
             rand = Random.Range(0, variants.bottomRooms.Count);
-            Instantiate(variants.bottomRooms[rand], transform.position, variants.bottomRooms[rand].transform.rotation);
+            GameObject newRoom = Instantiate(variants.bottomRooms[rand], transform.position, variants.bottomRooms[rand].transform.rotation);
+            newRoom.transform.SetParent(gameObject.transform.parent);
+            counter++;
         }
         spawned = true;
     }
    }
 
-   private void OnTriggerStay2D(Collider2D other) {
-    if (other.CompareTag("RoomPoint") && other.GetComponent<RoomGenerator>().spawned){
-        Destroy(other.gameObject);
+   private void OnTriggerEnter2D(Collider2D other) {
+    Debug.Log(gameObject.GetComponent<RoomGenerator>().direction);
+    if (other.CompareTag("RoomPoint") && gameObject.GetComponent<RoomGenerator>().spawned) {
+        if (other.GetComponent<RoomGenerator>().direction != Direction.None) {
+            Destroy(other.gameObject);
+        } else if (gameObject.GetComponent<RoomGenerator>().direction == Direction.None) {
+            Destroy(other.gameObject.transform.parent.gameObject);
+        }
     }
    }
 }
