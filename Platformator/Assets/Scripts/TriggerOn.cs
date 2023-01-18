@@ -8,7 +8,7 @@ public class TriggerOn : MonoBehaviour
     private GameObject[] triggerPlatforms;
     private GameObject player;
 
-    private void Awake() {
+    private void Start() {
         //Находим и получаем игрока и нужные платформы по их тегам
         player = GameObject.FindGameObjectWithTag("Player");
         triggerPlatforms = GameObject.FindGameObjectsWithTag("triggerPlatform");
@@ -17,7 +17,7 @@ public class TriggerOn : MonoBehaviour
     private void Update() {
         //Если игрок упал ниже платформы, то она опять должна стать триггером, прогоняем это для всех платформ
         foreach(var elem in triggerPlatforms){
-            if (elem.transform.localPosition.y > player.transform.localPosition.y){
+            if (elem.transform.position.y > player.transform.position.y){
                 BoxCollider2D tempCol = elem.GetComponent<BoxCollider2D>();
                 tempCol.isTrigger = true;
             } 

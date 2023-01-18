@@ -91,6 +91,10 @@ public class PlayerMovements : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D other) {
+        canJump = true;
+    }
+
     private void OnTriggerExit2D(Collider2D other) {
         if (other.gameObject.tag != "triggerPlatform"){
             other.gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
