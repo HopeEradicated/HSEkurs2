@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1536
     height: 780.8
   m_ShowMode: 4
-  m_Title: Scene
+  m_Title: Game
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -317,22 +317,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Rooms
+    - Assets/Scripts
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Rooms
+  - Assets/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Ilya\repos\GitPlatformer\Platformator
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: c8630000
-    m_LastClickedID: 25544
-    m_ExpandedIDs: 00000000c663000000ca9a3b
+    m_SelectedIDs: ce630000
+    m_LastClickedID: 25550
+    m_ExpandedIDs: 00000000c463000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -348,7 +348,7 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 0}
+      m_ClientGUIView: {fileID: 5}
     m_SearchString: 
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
@@ -490,7 +490,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: aa38ffff203cffff923dffff0044ffff644affff8051ffffc855ffffa257ffff4e61ffff3c64ffff9865fffff68affff5c98ffffa298ffff9ea5fffff2b2ffff2cb4ffff66baffff32c0ffff90c1ffff34d5ffff42d6ffff92ddffff90eeffff60f0ffffbef1ffffccf7ffff42f9ffff26fbffffd85e0000745f0000
+      m_ExpandedIDs: 26edffffb4edfffff4edffff26fbffffd85e0000725f0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -805,9 +805,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 33.4126, y: 6.9434824, z: 9.132736}
+    m_Target: {x: 0.91492087, y: -1.9840829, z: 0.45694715}
     speed: 2
-    m_Value: {x: 33.4126, y: 6.9434824, z: 9.132736}
+    m_Value: {x: 0.91492087, y: -1.9840829, z: 0.45694715}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -857,9 +857,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 47.910427
+    m_Target: 7.452322
     speed: 2
-    m_Value: 47.910427
+    m_Value: 7.452322
   m_Ortho:
     m_Target: 1
     speed: 2
