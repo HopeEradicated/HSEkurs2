@@ -7,6 +7,8 @@ using System.IO;
 
 public class SaveSerial : MonoBehaviour
 {
+    //В данном скрипте мы реализуем механику сохранения, загрузки и удаления данных игрока
+    //На текущей момент реализовано сохранения счёта и координат игрока, что не соответствует текщей версии программы, в перспективе доработать
     private int score;
     private customVector3 playerCoords = new customVector3();
 

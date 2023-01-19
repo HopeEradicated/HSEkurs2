@@ -53,10 +53,11 @@ public class RoomGenerator : MonoBehaviour
    }
 
    private void OnTriggerEnter2D(Collider2D other) {
-    Debug.Log(gameObject.GetComponent<RoomGenerator>().direction);
     if (other.CompareTag("RoomPoint") && gameObject.GetComponent<RoomGenerator>().spawned) {
+        //Если комната уже существует, то, если появляется ещё однеа точка спавна, то её нужно удалить 
         if (other.GetComponent<RoomGenerator>().direction != Direction.None) {
             Destroy(other.gameObject);
+        //Почему-то некоторые комнаты всё равно накладываются друг на друга, поэтому в такой ситуации мы просто удаляем ту комнату, которая появилась позже
         } else if (gameObject.GetComponent<RoomGenerator>().direction == Direction.None) {
             Destroy(other.gameObject.transform.parent.gameObject);
         }

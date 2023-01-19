@@ -50,11 +50,16 @@ public class PlayerMovements : MonoBehaviour
     private void FixedUpdate() {
         //Переписать, чтобы игрок мог спрыгивать со стен
         Physics2D.queriesStartInColliders = false;
-        if (Physics2D.Raycast(transform.position, Vector2.right * transform.localScale.x, wallCheckDist).collider != null && hDirection == -1) {
+        var raycastRight = Physics2D.Raycast(transform.position, Vector2.right * transform.localScale.x, wallCheckDist);
+        var raycastLeft = Physics2D.Raycast(transform.position, Vector2.left * transform.localScale.x, wallCheckDist);
+        //Тут два ифа бесполезных
+        if (raycastRight.collider == null && raycastLeft.collider == null) {
             playerRb.velocity = new Vector2(hDirection, playerRb.velocity.y);
-        } else if (Physics2D.Raycast(transform.position, Vector2.left * transform.localScale.x, wallCheckDist).collider != null && hDirection == 1) {
+        }else if (raycastRight.collider != null && raycastRight.collider.gameObject.tag == "Wall" && hDirection == -1) {
             playerRb.velocity = new Vector2(hDirection, playerRb.velocity.y);
-        } else if (Physics2D.Raycast(transform.position, Vector2.left * transform.localScale.x, wallCheckDist).collider == null && Physics2D.Raycast(transform.position, Vector2.right * transform.localScale.x, wallCheckDist).collider == null) {
+        } else if (raycastLeft.collider != null && raycastLeft.collider.gameObject.tag == "Wall" && hDirection == 1) {
+            playerRb.velocity = new Vector2(hDirection, playerRb.velocity.y);
+        } else if ((raycastRight.collider != null && raycastRight.collider.gameObject.tag != "Wall") || (raycastLeft.collider != null && raycastLeft.collider.gameObject.tag != "Wall")) {
             playerRb.velocity = new Vector2(hDirection, playerRb.velocity.y);
         }
 
