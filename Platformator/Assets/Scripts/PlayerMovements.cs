@@ -11,9 +11,12 @@ public class PlayerMovements : MonoBehaviour
     private float wallCheckDist = 2f;
     private bool canJump, isOnWall;
 
+    private BoxCollider2D playerCol2D;
+
     private void Start() {
         playerCoords = GetComponent<Transform>();
         playerRb = GetComponent<Rigidbody2D>();
+        playerCol2D = GetComponent<BoxCollider2D>();
     }
 
     private void Update() {
@@ -86,7 +89,7 @@ public class PlayerMovements : MonoBehaviour
             isOnWall = true;
         } else if (Input.GetKey(KeyCode.S)) {
             //Реализовываем механику спрыгивания с платформы
-            other.gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
+            playerCol2D.isTrigger = true;
         }
     }
 
@@ -101,10 +104,6 @@ public class PlayerMovements : MonoBehaviour
     }
 
     private void OnTriggerExit2D(Collider2D other) {
-        if (other.gameObject.tag != "triggerPlatform"){
-            other.gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
-        }
+        playerCol2D.isTrigger = false;
     }
 }
-
-//Идея: сделать зацеп, когда игрок касается вертикальной части платформы
