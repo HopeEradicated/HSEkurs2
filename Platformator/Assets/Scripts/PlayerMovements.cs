@@ -8,10 +8,12 @@ public class PlayerMovements : MonoBehaviour
 
     private float vForce = 450f/*Мб поменять название*/, hForce = 2f, plSpeed = 6f;
     private float hDirection = 0f, wallDirIndex = -0.1f;
-    private float wallCheckDist = 2f;
+    private float wallCheckDist = 0.5f;
     private bool canJump, isOnWall;
 
     private BoxCollider2D playerCol2D;
+    [SerializeField]
+    private SpriteRenderer playerSprite;
 
     private void Start() {
         playerCoords = GetComponent<Transform>();
@@ -33,7 +35,11 @@ public class PlayerMovements : MonoBehaviour
         }
         hDirection = Input.GetAxisRaw("Horizontal") * plSpeed;
         
-       
+        if (hDirection < 0) {
+            playerSprite.flipX = true;
+        } else if (hDirection > 0){
+            playerSprite.flipX = false;
+        }
         /*Оставить, как альтернативную физику движения, для другого персонажа или класса, например
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)){
             StrafeToTheRight();

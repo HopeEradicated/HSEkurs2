@@ -146,3 +146,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24c6d3c0d4933c2468a200c9de9d4caa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletSpriteRenderer: {fileID: 3401123875768526432}
