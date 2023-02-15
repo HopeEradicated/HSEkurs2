@@ -8,15 +8,15 @@ public class SpawnObjects : MonoBehaviour
     private int enemyRandBorder = 40, collectableRandBorder = 10;
     private int index1, index2;
     private int rand1, rand2;
+    private Vector2 portalPosition;
 
     public bool isRoomGeneratingFinished = false;
     private float waitTime = 1f;
 
     public List<GameObject> enemySpawnPoints, collectableSpawnPoints;
-    [SerializeField]
-    private GameObject collectableSample;
-    [SerializeField]
-    private List<GameObject> enemySamples;
+    [SerializeField] private GameObject collectableSample;
+    [SerializeField] private List<GameObject> enemySamples;
+    [SerializeField] private LevelsManager levelsManager;
 
     private void Start() {
         StartCoroutine(SpawnAllObjects());   
@@ -28,6 +28,7 @@ public class SpawnObjects : MonoBehaviour
         }
         SpawmEnemies();
         SpawnCollectable();
+        levelsManager.SpawnPortalPos(portalPosition);
     }
 
     private void SpawnCollectable() {
@@ -43,8 +44,9 @@ public class SpawnObjects : MonoBehaviour
                     collectableRandBorder += 5;
                 }
                 //collectableSpawnPoints[index1].transform.SetParent(null); <- Возможно, это надо, потенциально удалить
-                Destroy(collectableSpawnPoints[index1]);
             }
+            Destroy(collectableSpawnPoints[index1]);
+
             collectableSpawnPoints.RemoveAt(index1);
             index1--;
         }
@@ -65,10 +67,14 @@ public class SpawnObjects : MonoBehaviour
                     enemyCounter++;
                 }
                 //enemySpawnPoints[index2].transform.SetParent(null); <- Возможно, это надо, потенциально удалить
-                Destroy(enemySpawnPoints[index2]);
             }
+            Destroy(enemySpawnPoints[index2]);
             enemySpawnPoints.RemoveAt(index2);
             index2--;
         }
+    }
+
+    public void SetPortalPos(Vector2 portalPos) {
+        portalPosition = portalPos;
     }
 }

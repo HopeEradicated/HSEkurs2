@@ -279,6 +279,10 @@ PrefabInstance:
       propertyPath: direction
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: -1916966747935187301, guid: 1c7b38871aa1f5e41b0fd9470f1c81f1, type: 3}
+      propertyPath: portalTemplate
+      value: 
+      objectReference: {fileID: 2360547153280503414, guid: f95167f25187f2f49bfe186d796ab5bf, type: 3}
     - target: {fileID: 2735957490731722120, guid: 1c7b38871aa1f5e41b0fd9470f1c81f1, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -539,6 +543,10 @@ PrefabInstance:
       propertyPath: direction
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -1916966747935187301, guid: 1c7b38871aa1f5e41b0fd9470f1c81f1, type: 3}
+      propertyPath: portalTemplate
+      value: 
+      objectReference: {fileID: 2360547153280503414, guid: f95167f25187f2f49bfe186d796ab5bf, type: 3}
     - target: {fileID: 2735957490731722120, guid: 1c7b38871aa1f5e41b0fd9470f1c81f1, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -731,6 +739,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 8061304110428969991}
     m_Modifications:
+    - target: {fileID: -1916966747935187301, guid: 1c7b38871aa1f5e41b0fd9470f1c81f1, type: 3}
+      propertyPath: portalTemplate
+      value: 
+      objectReference: {fileID: 2360547153280503414, guid: f95167f25187f2f49bfe186d796ab5bf, type: 3}
     - target: {fileID: 2735957490731722120, guid: 1c7b38871aa1f5e41b0fd9470f1c81f1, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -799,6 +811,10 @@ PrefabInstance:
       propertyPath: direction
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1916966747935187301, guid: 1c7b38871aa1f5e41b0fd9470f1c81f1, type: 3}
+      propertyPath: portalTemplate
+      value: 
+      objectReference: {fileID: 2360547153280503414, guid: f95167f25187f2f49bfe186d796ab5bf, type: 3}
     - target: {fileID: 2735957490731722120, guid: 1c7b38871aa1f5e41b0fd9470f1c81f1, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -871,6 +887,10 @@ PrefabInstance:
       propertyPath: direction
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: -1916966747935187301, guid: 1c7b38871aa1f5e41b0fd9470f1c81f1, type: 3}
+      propertyPath: portalTemplate
+      value: 
+      objectReference: {fileID: 2360547153280503414, guid: f95167f25187f2f49bfe186d796ab5bf, type: 3}
     - target: {fileID: 2735957490731722120, guid: 1c7b38871aa1f5e41b0fd9470f1c81f1, type: 3}
       propertyPath: m_RootOrder
       value: -1
