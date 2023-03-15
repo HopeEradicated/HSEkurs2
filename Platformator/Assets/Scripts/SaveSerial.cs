@@ -58,7 +58,7 @@ public class SaveSerial : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.tag == "CollectiveElem"){
+        if (other.gameObject.tag == "CollectiveElem" && gameObject.tag == "Player"){
             score++;
             Debug.Log("Element is collected");
             Destroy(other.gameObject);

@@ -7,11 +7,21 @@ TagManager:
   - CollectiveElem
   - Ground
   - Wall
+  - Rooms
+  - PlayerField
+  - GameManager
+  - Shooter
+  - RoomPoint
+  - Bullet
+  - triggerPlatform
+  - EnemySpawnPoint
+  - CollectableSpawnPoint
+  - Border
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Entity
   - Water
   - UI
   - 

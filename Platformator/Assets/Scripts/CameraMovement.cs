@@ -1,10 +1,13 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
     public Transform playerCoords;
     public Camera mainCam;
-    private float camMoveSpeed = 10f, camMoveSpeed1 = 23f, horizontalDistance = 11.5f;
+    [SerializeField] private List<GameObject> followObjects;
+    private float camMoveSpeed = 14f, camMoveSpeed1 = 24.9f, horizontalDistance = 11.5f;
 
     private void Update() {
         //Проверяем, если игрок вышел за границы видимости камеры, то двигаем её в нужном направлении
@@ -15,20 +18,24 @@ public class CameraMovement : MonoBehaviour
             moveCameraVertical(-2*mainCam.orthographicSize);
         }
         if (playerCoords.localPosition.x > horizontalDistance + mainCam.transform.localPosition.x) { 
-            moveCameraHorizontal(23f);
+            moveCameraHorizontal(24.9f);
         } 
         if (playerCoords.localPosition.x <  mainCam.transform.localPosition.x - horizontalDistance){
-            moveCameraHorizontal(-23f);
+            moveCameraHorizontal(-24.9f);
         }
     }
 
-    private void moveCameraVertical(float distance){
-        mainCam.transform.localPosition = Vector3.MoveTowards(mainCam.transform.localPosition, 
-        new Vector3(mainCam.transform.localPosition.x, mainCam.transform.localPosition.y + distance,mainCam.transform.localPosition.z), camMoveSpeed);
+    private void moveCameraVertical(float distance) {
+        foreach (var elem in followObjects) {
+            elem.transform.localPosition = Vector3.MoveTowards(elem.transform.localPosition, 
+            new Vector3(elem.transform.localPosition.x, elem.transform.localPosition.y + distance,elem.transform.localPosition.z), camMoveSpeed);
+        }
     }
 
-    private void moveCameraHorizontal(float distance){
-        mainCam.transform.localPosition = Vector3.MoveTowards(mainCam.transform.localPosition, 
-        new Vector3(mainCam.transform.localPosition.x + distance, mainCam.transform.localPosition.y,mainCam.transform.localPosition.z), camMoveSpeed1);
+    private void moveCameraHorizontal(float distance) {
+        foreach (var elem in followObjects) {
+            elem.transform.localPosition = Vector3.MoveTowards(elem.transform.localPosition, 
+            new Vector3(elem.transform.localPosition.x + distance, elem.transform.localPosition.y,elem.transform.localPosition.z), camMoveSpeed1);    
+        }
     }
 }

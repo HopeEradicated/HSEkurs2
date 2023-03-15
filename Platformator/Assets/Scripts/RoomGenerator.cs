@@ -6,22 +6,22 @@ using System;
 public class RoomGenerator : MonoBehaviour
 {
     private static RoomVariants variants;
-    private static SpawnObjects spawner;
 
+    [SerializeField] static private SpawnLevel spawnPointsHolder; 
+
+    [Header("BorderRoomsPrefabs")]
     [SerializeField] private GameObject topBorderRooom;
     [SerializeField] private GameObject rightBorderRooom;
     [SerializeField] private GameObject leftBorderRooom;
     [SerializeField] private GameObject bottomBorderRooom;
 
     private int rand;
-    private float waitTime = 1f;
     public bool spawned = false;
     private int spawnBorder = 25;
     private static float theFarestRoomCoordsSum = 0;
     private static Vector2 theFarestRoomPos;
 
     private static int roomCounter = 0;
-    private static int spawnPointCounter = 0;
 
 
     public Direction direction;
@@ -34,10 +34,8 @@ public class RoomGenerator : MonoBehaviour
     }
 
     private void Awake() {
-        Destroy(gameObject, waitTime);
-        Invoke("Spawn", 0.2f);
         if (direction != Direction.None) {
-            spawnPointCounter++;
+            spawnPointsHolder.spawnPoints.Add(gameObject);
         }
     }
 
@@ -46,7 +44,6 @@ public class RoomGenerator : MonoBehaviour
     }
 
     public void Spawn() {
-        //Debug.Log("Spawnpoints left " + spawnPointCounter);
         if(!spawned) {
             GameObject newRoom = null;
             if (direction == Direction.Top ) {
@@ -81,7 +78,6 @@ public class RoomGenerator : MonoBehaviour
             if (direction != Direction.None) {
                 workWithNewRoom(newRoom);
                 roomCounter++;
-                spawnPointCounter--;  
             }
             spawned = true;
             if (newRoom != null) {
@@ -91,39 +87,40 @@ public class RoomGenerator : MonoBehaviour
                     theFarestRoomPos = newRoom.transform.position;
                 }
             }
-        } else if (spawnPointCounter <= 0) {
-            spawner.isRoomGeneratingFinished = true;
-            spawner.SetPortalPos(theFarestRoomPos);
         }
     }
 
     private void workWithNewRoom(GameObject newRoom) {
             newRoom.transform.SetParent(gameObject.transform.parent);
-            foreach(Transform child in newRoom.transform) {
+            /*foreach(Transform child in newRoom.transform) {
                 if (child.gameObject.tag == "EnemySpawnPoint") {
                     spawner.enemySpawnPoints.Add(child.gameObject);
                 } else if (child.gameObject.tag == "CollectableSpawnPoint") {
                     spawner.collectableSpawnPoints.Add(child.gameObject);
                 }
-            }
+            }*/
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.CompareTag("RoomPoint") && gameObject.GetComponent<RoomGenerator>().spawned) {
-            //Если комната уже существует, то, если появляется ещё однеа точка спавна, то её нужно удалить 
-            if (other.GetComponent<RoomGenerator>().direction != Direction.None) {
+        Direction thisPointDir = gameObject.GetComponent<RoomGenerator>().direction;
+        if (other.CompareTag("RoomPoint")) {
+            Direction otherPointDir = other.gameObject.GetComponent<RoomGenerator>().direction;
+            if (otherPointDir != Direction.None && thisPointDir == Direction.None) {
                 Destroy(other.gameObject);
-            //Почему-то некоторые комнаты всё равно накладываются друг на друга, поэтому в такой ситуации мы просто удаляем ту комнату, которая появилась позже
-            } else if (gameObject.GetComponent<RoomGenerator>().direction == Direction.None) {
+            } 
+            
+            if (thisPointDir == Direction.None && other.gameObject.tag == "LowerPrioritySpawnPoint") {
+                Debug.Log("Collision");
+
                 Destroy(other.gameObject.transform.parent.gameObject);
+                roomCounter--;
             }
-            spawnPointCounter--;
         }
     }
 
     public void FindAllNeededScripts() {
         variants = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomVariants>();
-        spawner = GameObject.FindGameObjectWithTag("GameManager").GetComponent<SpawnObjects>();
+        spawnPointsHolder = GameObject.FindGameObjectWithTag("GameManager").GetComponent<SpawnLevel>();
     }
 
     public void SetCounterToZero() {

@@ -7,9 +7,6 @@ public class Bullet : MonoBehaviour
     private bool parentFlipedX;
     private int direction = 0;
 
-    [SerializeField]
-    private SpriteRenderer bulletSpriteRenderer;
-
     public void SetIsFliped(bool isFliped) {
         parentFlipedX = isFliped;
     }
@@ -30,8 +27,9 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.tag == "Player") {
             Debug.Log("Hit the player");
-        } else if (other.gameObject.tag != "Shooter" && other.gameObject.tag != "CollectiveElem") {
-            bulletSpriteRenderer.enabled = false;
+            other.gameObject.GetComponent<Player>().ChangeHealthPoints(-1);
+        } else if (other.gameObject.tag == "Wall") {
+            gameObject.SetActive(false);
         }
     }
 }
