@@ -6,8 +6,8 @@ using System;
 public class RoomGenerator : MonoBehaviour
 {
     private static RoomVariants variants;
-
-    [SerializeField] static private SpawnLevel spawnPointsHolder; 
+    private static SpawnLevel spawnPointsHolder; 
+    private static SpawnObjects objectsSpawner; 
 
     [Header("BorderRoomsPrefabs")]
     [SerializeField] private GameObject topBorderRooom;
@@ -19,7 +19,6 @@ public class RoomGenerator : MonoBehaviour
     public bool spawned = false;
     private int spawnBorder = 25;
     private static float theFarestRoomCoordsSum = 0;
-    private static Vector2 theFarestRoomPos;
 
     private static int roomCounter = 0;
 
@@ -49,30 +48,30 @@ public class RoomGenerator : MonoBehaviour
             if (direction == Direction.Top ) {
                 if (roomCounter < spawnBorder) {
                     rand = UnityEngine.Random.Range(0, variants.topRooms.Count);
-                    newRoom = Instantiate(variants.topRooms[rand], transform.position, variants.topRooms[rand].transform.rotation);
+                    newRoom = Instantiate(variants.topRooms[rand], transform.position, Quaternion.identity);
                 } else {
-                    newRoom = Instantiate(topBorderRooom, transform.position, topBorderRooom.transform.rotation);
+                    newRoom = Instantiate(topBorderRooom, transform.position, Quaternion.identity);
                 }
             } else if (direction == Direction.Right) {
                 if (roomCounter < spawnBorder) {
                     rand = UnityEngine.Random.Range(0, variants.rightRooms.Count);
-                    newRoom = Instantiate(variants.rightRooms[rand], transform.position, variants.rightRooms[rand].transform.rotation);
+                    newRoom = Instantiate(variants.rightRooms[rand], transform.position, Quaternion.identity);
                 } else {
-                    newRoom = Instantiate(rightBorderRooom, transform.position, rightBorderRooom.transform.rotation);
+                    newRoom = Instantiate(rightBorderRooom, transform.position, Quaternion.identity);
                 }
             } else if (direction == Direction.Left) {
                 if (roomCounter < spawnBorder) {
                     rand = UnityEngine.Random.Range(0, variants.leftRooms.Count);
-                    newRoom = Instantiate(variants.leftRooms[rand], transform.position, variants.leftRooms[rand].transform.rotation);
+                    newRoom = Instantiate(variants.leftRooms[rand], transform.position, Quaternion.identity);
                 } else {
-                    newRoom = Instantiate(leftBorderRooom, transform.position, leftBorderRooom.transform.rotation);
+                    newRoom = Instantiate(leftBorderRooom, transform.position, Quaternion.identity);
                 }
             } else if (direction == Direction.Bottom) {
                 if (roomCounter < spawnBorder) {
                     rand = UnityEngine.Random.Range(0, variants.bottomRooms.Count);
-                    newRoom = Instantiate(variants.bottomRooms[rand], transform.position, variants.bottomRooms[rand].transform.rotation);
+                    newRoom = Instantiate(variants.bottomRooms[rand], transform.position, Quaternion.identity);
                 } else {
-                    newRoom = Instantiate(bottomBorderRooom, transform.position, bottomBorderRooom.transform.rotation);
+                    newRoom = Instantiate(bottomBorderRooom, transform.position, Quaternion.identity);
                 }
             }
             if (direction != Direction.None) {
@@ -84,7 +83,7 @@ public class RoomGenerator : MonoBehaviour
                 float curRoomCoordsSum = newRoom.transform.position.x + newRoom.transform.position.y;
                 if (Math.Abs(curRoomCoordsSum) > theFarestRoomCoordsSum) {
                     theFarestRoomCoordsSum = Math.Abs(curRoomCoordsSum);
-                    theFarestRoomPos = newRoom.transform.position;
+                    objectsSpawner.SetPortalPos(newRoom.transform.position);
                 }
             }
         }
@@ -92,13 +91,13 @@ public class RoomGenerator : MonoBehaviour
 
     private void workWithNewRoom(GameObject newRoom) {
             newRoom.transform.SetParent(gameObject.transform.parent);
-            /*foreach(Transform child in newRoom.transform) {
+            foreach(Transform child in newRoom.transform) {
                 if (child.gameObject.tag == "EnemySpawnPoint") {
-                    spawner.enemySpawnPoints.Add(child.gameObject);
+                    objectsSpawner.enemySpawnPoints.Add(child.gameObject);
                 } else if (child.gameObject.tag == "CollectableSpawnPoint") {
-                    spawner.collectableSpawnPoints.Add(child.gameObject);
+                    objectsSpawner.collectableSpawnPoints.Add(child.gameObject);
                 }
-            }*/
+            }
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
@@ -121,6 +120,7 @@ public class RoomGenerator : MonoBehaviour
     public void FindAllNeededScripts() {
         variants = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomVariants>();
         spawnPointsHolder = GameObject.FindGameObjectWithTag("GameManager").GetComponent<SpawnLevel>();
+        objectsSpawner = GameObject.FindGameObjectWithTag("GameManager").GetComponent<SpawnObjects>();
     }
 
     public void SetCounterToZero() {

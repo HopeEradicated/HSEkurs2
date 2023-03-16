@@ -25,7 +25,7 @@ public class SpawnLevel : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
         }
         Debug.Log("Finished");
-
+        EventBus.onGenerationFinished?.Invoke();
         StopCoroutine(spawnRoomsCoroutine);
     }
 }

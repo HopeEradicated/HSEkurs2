@@ -10,25 +10,18 @@ public class SpawnObjects : MonoBehaviour
     private int rand1, rand2;
     private Vector2 portalPosition;
 
-    public bool isRoomGeneratingFinished = false;
-    private float waitTime = 1f;
-
+    [Header("ObjectsPrefabs")]
+    [SerializeField] private GameObject portalTemplate;
     public List<GameObject> enemySpawnPoints, collectableSpawnPoints;
+
+    [Header("Scripts")]
     [SerializeField] private GameObject collectableSample;
     [SerializeField] private List<GameObject> enemySamples;
-    [SerializeField] private LevelsManager levelsManager;
 
-    private void Start() {
-        StartCoroutine(SpawnAllObjects());   
-    }
-
-    private IEnumerator SpawnAllObjects() {
-        while (!isRoomGeneratingFinished){
-            yield return new WaitForSeconds(waitTime);
-        }
+    public void SpawnAllObjects() {
         SpawmEnemies();
         SpawnCollectable();
-        levelsManager.SpawnPortalPos(portalPosition);
+        SpawnPortalPos();
     }
 
     private void SpawnCollectable() {
@@ -72,6 +65,13 @@ public class SpawnObjects : MonoBehaviour
             enemySpawnPoints.RemoveAt(index2);
             index2--;
         }
+    }
+
+    public void SpawnPortalPos() {
+        //Задаём координату по оси z, чтобы визуально портал отображался поверх других объектов на сцене
+        Vector3 curPortalPos = (Vector3)portalPosition;
+        curPortalPos.z = -5;
+        Instantiate(portalTemplate, curPortalPos, portalTemplate.transform.rotation);
     }
 
     public void SetPortalPos(Vector2 portalPos) {

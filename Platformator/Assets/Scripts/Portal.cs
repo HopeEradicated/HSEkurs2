@@ -4,28 +4,21 @@ using UnityEngine;
 public class Portal : MonoBehaviour
 {
     private static int levelsCounter;
-    private InitLevel levelInitializer;
 
     private void Start() {
-        levelInitializer = GameObject.FindGameObjectWithTag("GameManager").GetComponent<InitLevel>();
         Debug.Log("Player has completed " + levelsCounter + " levels");
     }
 
     private void OnTriggerStay2D(Collider2D other) {
         if (Input.GetKey(KeyCode.E) && other.gameObject.tag == "Player") {
-            RestartLevel();
+            LoadNextLevel();
         }
     }
 
-    public void RestartLevel() {
+    public void LoadNextLevel() {
         levelsCounter++;
         //Загрузка определённого уровня, переделать
         Destroy(gameObject);
         SceneManager.LoadScene("Level2");
-        levelInitializer.CreateObjects();
-    }
-
-    private void DestroyOldPortal() {
-        Invoke("DestroyOldPortal", 1f);
     }
 }
