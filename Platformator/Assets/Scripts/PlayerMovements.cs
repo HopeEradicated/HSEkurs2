@@ -51,8 +51,7 @@ public class PlayerMovements : MonoBehaviour
         */
 
         if (Input.GetKey(KeyCode.F)){
-            playerCoords.localPosition = Vector3.Lerp(playerCoords.localPosition, 
-            new Vector3(0, 1f,0), 5f);
+            playerCoords.localPosition = Vector3.Lerp(playerCoords.localPosition, new Vector3(0, 1f,0), 5f);
         }
     }
 

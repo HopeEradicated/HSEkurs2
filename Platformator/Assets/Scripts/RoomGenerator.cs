@@ -7,7 +7,8 @@ public class RoomGenerator : MonoBehaviour
 {
     private static RoomVariants variants;
     private static SpawnLevel spawnPointsHolder; 
-    private static SpawnObjects objectsSpawner; 
+    private static SpawnObjects objectsSpawner;
+    private static GameObject roomsParent;
 
     [Header("BorderRoomsPrefabs")]
     [SerializeField] private GameObject topBorderRooom;
@@ -90,7 +91,7 @@ public class RoomGenerator : MonoBehaviour
     }
 
     private void workWithNewRoom(GameObject newRoom) {
-            newRoom.transform.SetParent(gameObject.transform.parent);
+            newRoom.transform.SetParent(roomsParent.transform);
             foreach(Transform child in newRoom.transform) {
                 if (child.gameObject.tag == "EnemySpawnPoint") {
                     objectsSpawner.enemySpawnPoints.Add(child.gameObject);
@@ -121,6 +122,7 @@ public class RoomGenerator : MonoBehaviour
         variants = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomVariants>();
         spawnPointsHolder = GameObject.FindGameObjectWithTag("GameManager").GetComponent<SpawnLevel>();
         objectsSpawner = GameObject.FindGameObjectWithTag("GameManager").GetComponent<SpawnObjects>();
+        roomsParent = GameObject.FindGameObjectWithTag("Rooms");
     }
 
     public void SetCounterToZero() {

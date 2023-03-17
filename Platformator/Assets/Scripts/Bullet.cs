@@ -27,7 +27,7 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.tag == "Player") {
             Debug.Log("Hit the player");
-            //other.gameObject.GetComponent<Player>().ChangeHealthPoints(-1);
+            other.gameObject.GetComponent<Player>().ChangeHealthPoints(-1);
         } else if (other.gameObject.tag == "Wall") {
             gameObject.SetActive(false);
         }

@@ -3,30 +3,37 @@ using UnityEngine;
 
 public class RestartLevel : MonoBehaviour
 {
-    private static GameObject generatedLevel; 
+    private GameObject generatedLevel; 
     [SerializeField] private GameObject playerObject;
+    [SerializeField] private GameObject roomsHolder;
 
     private Player playerInfo;
-    private static bool isLevelRestarted;
 
     private void Start() {
-        if (isLevelRestarted) {
-            Debug.Log("1 " + generatedLevel + "2 " + playerObject);
-            Instantiate(generatedLevel, new Vector2(0, 0), Quaternion.identity);
-            Instantiate(playerObject, new Vector2(0, 1), Quaternion.identity);
-            isLevelRestarted = false;
-        }
         playerInfo = playerObject.GetComponent<Player>();
     }
 
     private void Update() {
         if (playerInfo.isHealhEqualToZero()) {
-            isLevelRestarted = true;
-            SceneManager.LoadScene("RestartedLevel");
+            Destroy(roomsHolder);
+            roomsHolder = generatedLevel;
+            generatedLevel.SetActive(true);
+            CreateLevelClone();
+            playerObject.transform.position = Vector3.Lerp(playerObject.transform.position, new Vector3(0, 1f,0), 5f);
+            for (int i = 0; i < 3;i++) {
+                playerInfo.ChangeHealthPoints(1);
+            }
         }
     }
 
     public void SetGeneratedLevel() {
-        generatedLevel = GameObject.FindGameObjectWithTag("Rooms");
+        GameObject generatedLevelTemplate = GameObject.FindGameObjectWithTag("Rooms");
+        generatedLevel = Instantiate(generatedLevelTemplate, new Vector2(0, 0), Quaternion.identity);
+        generatedLevel.SetActive(false);
+    }
+
+    private void CreateLevelClone() {
+        generatedLevel = Instantiate(generatedLevel, new Vector2(0, 0), Quaternion.identity);
+        generatedLevel.SetActive(false);
     }
 }
