@@ -21,7 +21,7 @@ public class Shooter : MonoBehaviour
             yield return new WaitForSeconds(waitTime);
 
             GameObject curBullet = Instantiate(bulletSample, gameObject.transform.position, gameObject.transform.rotation);
-            curBullet.GetComponent<Bullet>().SetIsFliped(isFliped);
+            curBullet.GetComponent<Bullet>().SetIsFliped(!isFliped);
         }
     }
 }

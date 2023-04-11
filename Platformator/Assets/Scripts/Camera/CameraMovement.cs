@@ -7,7 +7,7 @@ public class CameraMovement : MonoBehaviour
     public Transform playerCoords;
     public Camera mainCam;
     [SerializeField] private List<GameObject> followObjects;
-    private float camMoveSpeed = 14f, camMoveSpeed1 = 24.9f, horizontalDistance = 12.45f;
+    private float camMoveSpeed = 14f, camMoveSpeed1 = 25f, horizontalDistance = 12.5f;
 
     private void Update() {
         //Проверяем, если игрок вышел за границы видимости камеры, то двигаем её в нужном направлении
@@ -18,10 +18,10 @@ public class CameraMovement : MonoBehaviour
             moveCameraVertical(-2*mainCam.orthographicSize);
         }
         if (playerCoords.localPosition.x > horizontalDistance + mainCam.transform.localPosition.x) { 
-            moveCameraHorizontal(24.9f);
+            moveCameraHorizontal(2*horizontalDistance);
         } 
         if (playerCoords.localPosition.x <  mainCam.transform.localPosition.x - horizontalDistance){
-            moveCameraHorizontal(-24.9f);
+            moveCameraHorizontal(-2*horizontalDistance);
         }
     }
 

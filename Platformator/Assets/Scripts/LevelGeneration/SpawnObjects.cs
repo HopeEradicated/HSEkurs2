@@ -55,7 +55,7 @@ public class SpawnObjects : MonoBehaviour
                     GameObject curEnemy = Instantiate(enemySamples[rand2], enemySpawnPoints[index2].transform.position, enemySpawnPoints[index2].transform.rotation);
                     curEnemy.transform.SetParent(enemySpawnPoints[index2].transform.parent);
                     if (curEnemy.transform.localPosition.x > 0) {
-                        curEnemy.GetComponent<SpriteRenderer>().flipX = false;
+                        curEnemy.GetComponent<SpriteRenderer>().flipX = true;
                     }
                     enemyCounter++;
                 }

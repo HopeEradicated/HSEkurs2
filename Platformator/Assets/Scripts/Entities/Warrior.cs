@@ -26,8 +26,11 @@ public class Warrior : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        if (other.gameObject.tag != "Ground" || other.gameObject.transform.position.y > gameObject.transform.position.y) {
+        if (other.gameObject.tag == "Player") {
+            other.gameObject.GetComponent<Player>().ChangeHealthPoints(-1);
+        } else if (other.gameObject.tag != "Ground" || other.gameObject.transform.position.y > gameObject.transform.position.y) {
             unitSprite.flipX = !unitSprite.flipX;
         }
+
     }
 }

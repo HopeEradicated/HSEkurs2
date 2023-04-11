@@ -4,6 +4,7 @@ using UnityEngine;
 public class Portal : MonoBehaviour
 {
     private static int levelsCounter;
+    private int levelsToBoss = 2;
 
     private void Start() {
         Debug.Log("Player has completed " + levelsCounter + " levels");
@@ -19,6 +20,10 @@ public class Portal : MonoBehaviour
         levelsCounter++;
         //Загрузка определённого уровня, переделать
         Destroy(gameObject);
-        SceneManager.LoadScene("Level2");
+        if (levelsCounter < levelsToBoss) {
+            SceneManager.LoadScene("Game");
+        } else {
+            SceneManager.LoadScene("Boss");
+        }
     }
 }
