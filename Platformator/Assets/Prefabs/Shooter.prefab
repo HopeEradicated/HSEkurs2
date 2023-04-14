@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 7594547601084253973}
   - component: {fileID: 8008042952974424944}
   - component: {fileID: 6400107817477944784}
+  - component: {fileID: 5912987021510988490}
   m_Layer: 0
   m_Name: Shooter
-  m_TagString: Shooter
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -82,7 +83,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 5.96, y: 8.42}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -151,3 +152,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5933170351ddce54dbbbce65aaf36860, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5912987021510988490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7594547601084253970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 098cbc3c88b8cff41ae2af12978bdbf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 10
+  value: 2

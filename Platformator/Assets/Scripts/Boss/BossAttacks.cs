@@ -1,15 +1,34 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class BossAttacks : MonoBehaviour
 {
     [SerializeField] private GameObject missileSample;
+    [SerializeField] private BossInfo bossInfo;
+    private Coroutine attackCoroutine;
 
-    private float missileSpeed = 5f;
+    private float missileSpeed = 6f;
+    private float healthStep;
+
+    private List<string> attackNames = new List<string>(){"SimpleAttack", "TrippleAttack"};
+    private List<string> specialAttackNames = new List<string>(){"GutlingGun", "SideAttack"};
+    private int attackIndex = 0;
+    private bool isBossHealthLessThanAHalf;
 
     private void Start() {
-        //StartCoroutine("TrippleAttack");
-        CallAttackNTimes("GutlingGun", 20, 0.5f);
+        attackCoroutine = StartCoroutine(attackNames[attackIndex]);
+        healthStep = bossInfo.GetBossPrimaryHealth() / 2;
+        //CallAttackNTimes("SideAttack", 10, 1.5f);
+    }
+
+    private void Update() {
+        if (bossInfo.GetBossHealth() < bossInfo.GetBossPrimaryHealth() - healthStep && !isBossHealthLessThanAHalf) {
+            StopCoroutine(attackCoroutine);
+            attackIndex++;
+            attackCoroutine = StartCoroutine(attackNames[attackIndex]);
+            isBossHealthLessThanAHalf = true;
+        }
     }
 
     private IEnumerator SimpleAttack() {
@@ -36,12 +55,9 @@ public class BossAttacks : MonoBehaviour
             Rigidbody2D secondMissileRb = secondMissile.GetComponent<Rigidbody2D>();
             Rigidbody2D thirdMissileRb = thirdMissile.GetComponent<Rigidbody2D>();
 
-            secondMissile.GetComponent<SpriteRenderer>().color = Color.red;
-            thirdMissile.GetComponent<SpriteRenderer>().color = Color.blue;
-
             firstMissileRb.velocity = new Vector2(playerPos.x - transform.position.x, playerPos.y - transform.position.y).normalized * missileSpeed;
-            secondMissileRb.velocity = new Vector2(1.5f*(playerPos.x) + 1f - transform.position.x, playerPos.y - transform.position.y).normalized * missileSpeed;
-            thirdMissileRb.velocity = new Vector2(0.5f*(playerPos.x) + 1f - transform.position.x, playerPos.y - transform.position.y).normalized * missileSpeed;
+            secondMissileRb.velocity = new Vector2(1.2f*playerPos.x + 1f - transform.position.x, 0.7f*playerPos.y - transform.position.y).normalized * missileSpeed;
+            thirdMissileRb.velocity = new Vector2(0.7f*playerPos.x - 1f - transform.position.x, 1.2f*playerPos.y - transform.position.y).normalized * missileSpeed;
             yield return new WaitForSeconds(2f);
         }
     }
@@ -55,7 +71,7 @@ public class BossAttacks : MonoBehaviour
     }
 
     private void GutlingGun() {
-        float randModifier = Random.Range(-3, 3);
+        float randModifier = Random.Range(-6, 6);
 
         Vector2 playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
 

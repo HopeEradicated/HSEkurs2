@@ -1,0 +1,1 @@
+{"level":4,"expPoints":130,"expCurMax":500,"gainedLevel":0,"selectedSkills":["Inf","Zim","Zim","Inf"]}

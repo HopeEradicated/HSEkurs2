@@ -8,8 +8,10 @@ public class PlayerMovements : MonoBehaviour
 
     private float vForce = 450f/*Мб поменять название*/, hForce = 2f, plSpeed = 6f;
     private float hDirection = 0f, wallDirIndex = -0.1f;
-    private float wallCheckDist = 0.5f;
-    private bool canJump, isOnWall;
+    private float wallCheckDist = 1f;
+    private bool isOnWall;
+    [HideInInspector]
+    public bool canJump;
 
     private BoxCollider2D playerCol2D;
     [SerializeField]
@@ -24,10 +26,10 @@ public class PlayerMovements : MonoBehaviour
     private void Update() {
         if (canJump){
             if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space)) && !Input.GetKey(KeyCode.S)){
+                playerRb.velocity = new Vector2(playerRb.velocity.x, 0);
                 Jump();
                 canJump = false;
             } else if (isOnWall){
-                //Могут возникать проблемы, если на карте будут соприкасаться платформы и стены. Потенциально - поменять
                 if (playerRb.velocity.y < plSpeed){
                     playerRb.velocity = new Vector2(playerRb.velocity.x, wallDirIndex*plSpeed);
                 }
@@ -56,21 +58,15 @@ public class PlayerMovements : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        //Переписать, чтобы игрок мог спрыгивать со стен
         Physics2D.queriesStartInColliders = false;
         var raycastRight = Physics2D.Raycast(transform.position, Vector2.right * transform.localScale.x, wallCheckDist);
         var raycastLeft = Physics2D.Raycast(transform.position, Vector2.left * transform.localScale.x, wallCheckDist);
-        //Тут два ифа бесполезных
-        if (raycastRight.collider == null && raycastLeft.collider == null) {
-            playerRb.velocity = new Vector2(hDirection, playerRb.velocity.y);
-        }else if (raycastRight.collider != null && raycastRight.collider.gameObject.tag == "Wall" && hDirection == -1) {
-            playerRb.velocity = new Vector2(hDirection, playerRb.velocity.y);
-        } else if (raycastLeft.collider != null && raycastLeft.collider.gameObject.tag == "Wall" && hDirection == 1) {
-            playerRb.velocity = new Vector2(hDirection, playerRb.velocity.y);
-        } else if ((raycastRight.collider != null && raycastRight.collider.gameObject.tag != "Wall") || (raycastLeft.collider != null && raycastLeft.collider.gameObject.tag != "Wall")) {
+
+        bool isSomeBlockingObjectOnTheLeft = (raycastLeft.collider != null && (raycastLeft.collider.gameObject.tag == "Wall" || raycastLeft.collider.gameObject.tag == "Border"));
+        bool isSomeBlockingObjectOnTheRight = (raycastRight.collider != null && (raycastRight.collider.gameObject.tag == "Wall" || raycastRight.collider.gameObject.tag == "Border"));
+        if ((isSomeBlockingObjectOnTheRight && hDirection < 0 ) || (isSomeBlockingObjectOnTheLeft && hDirection > 0) || (!isSomeBlockingObjectOnTheLeft && !isSomeBlockingObjectOnTheRight)) {
             playerRb.velocity = new Vector2(hDirection, playerRb.velocity.y);
         }
-
     }
 
     private void Jump(){
@@ -85,12 +81,9 @@ public class PlayerMovements : MonoBehaviour
         playerRb.AddForce(playerCoords.right * -1 * hForce);
     }
 
-    private void OnCollisionEnter2D(Collision2D other) {
-        canJump = true;
-    }
-
     private void OnCollisionStay2D(Collision2D other) {
         if (other.gameObject.tag == "Wall"){
+            canJump = true;
             isOnWall = true;
         } else if (Input.GetKey(KeyCode.S)) {
             //Реализовываем механику спрыгивания с платформы
@@ -102,10 +95,6 @@ public class PlayerMovements : MonoBehaviour
         if (other.gameObject.tag == "Wall"){
             isOnWall = false;
         }
-    }
-
-    private void OnTriggerEnter2D(Collider2D other) {
-        canJump = true;
     }
 
     private void OnTriggerExit2D(Collider2D other) {

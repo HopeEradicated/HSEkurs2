@@ -600,7 +600,7 @@ GameObject:
   - component: {fileID: 1078495408}
   m_Layer: 0
   m_Name: Boss
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -656,7 +656,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d83e6bd741e09441a5d39618a09b5e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missileSample: {fileID: 5460361762654681880, guid: d844cd625c38eb64396cd22af7c4c445, type: 3}
+  missileSample: {fileID: 3660513573783223384, guid: 4142d2d96b4ac1b468792f4d45a1d173, type: 3}
+  bossInfo: {fileID: 1078495409}
 --- !u!212 &1078495411
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1166,6 +1167,14 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2678030647418652384, guid: dd7bcf43fa5d6fd45912c6f9f50d943d, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678030647418652386, guid: dd7bcf43fa5d6fd45912c6f9f50d943d, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2678030647418652387, guid: dd7bcf43fa5d6fd45912c6f9f50d943d, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1264,7 +1273,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.30625004, y: 0.8467778}
   m_AnchorMax: {x: 0.6867917, y: 0.96211106}
-  m_AnchoredPosition: {x: 6.5, y: 1.5}
+  m_AnchoredPosition: {x: 560.69, y: 20.199982}
   m_SizeDelta: {x: -421, y: -75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1376738551
@@ -1451,7 +1460,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.19, y: 438.3}
+  m_AnchoredPosition: {x: 554, y: 457}
   m_SizeDelta: {x: 291.68, y: 50.81}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1597544173

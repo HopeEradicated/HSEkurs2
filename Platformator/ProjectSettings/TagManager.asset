@@ -10,13 +10,16 @@ TagManager:
   - Rooms
   - PlayerField
   - GameManager
-  - Shooter
   - RoomPoint
-  - Bullet
   - triggerPlatform
   - EnemySpawnPoint
   - CollectableSpawnPoint
   - Border
+  - Health
+  - RoomShell
+  - Missile
+  - Boss
+  - Enemy
   layers:
   - Default
   - TransparentFX

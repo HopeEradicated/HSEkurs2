@@ -19,4 +19,12 @@ public class BossInfo : MonoBehaviour
     private void FillHealthBar() {
         BossHealthBar.fillAmount = health / primaryHealth;
     }
+
+    public float GetBossHealth() {
+        return health;
+    }
+
+    public float GetBossPrimaryHealth() {
+        return primaryHealth;
+    }
 }

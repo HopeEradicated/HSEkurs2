@@ -273,11 +273,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 215804461}
   m_CullTransparentMesh: 1
---- !u!1 &260152926 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3045527696057640829, guid: 010885b8d3ccea94c945015b42973f40, type: 3}
-  m_PrefabInstance: {fileID: 672790999}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &283529643
 GameObject:
   m_ObjectHideFlags: 0
@@ -548,10 +543,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b53b61a153896c41a87f001f126e7e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthIcons:
-  - {fileID: 1876508980}
-  - {fileID: 260152926}
-  - {fileID: 1803517249}
+  gainedLevel: 0
+  selectedSkills: []
 --- !u!114 &532534771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -577,6 +570,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d65bda26f1eb85a439d9431cd55fc707, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canJump: 0
   playerSprite: {fileID: 532534775}
 --- !u!50 &532534773
 Rigidbody2D:
@@ -674,7 +668,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &532534776
@@ -1834,16 +1828,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1769085148}
   m_CullTransparentMesh: 1
---- !u!1 &1803517249 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3045527696057640829, guid: 010885b8d3ccea94c945015b42973f40, type: 3}
-  m_PrefabInstance: {fileID: 1494002272}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1876508980 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3045527696057640829, guid: 010885b8d3ccea94c945015b42973f40, type: 3}
-  m_PrefabInstance: {fileID: 2116401273}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1964091563
 GameObject:
   m_ObjectHideFlags: 0
@@ -2129,18 +2113,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2678030647418652388, guid: dd7bcf43fa5d6fd45912c6f9f50d943d, type: 3}
-      propertyPath: healthIcons.Array.data[0]
-      value: 
-      objectReference: {fileID: 1876508980}
-    - target: {fileID: 2678030647418652388, guid: dd7bcf43fa5d6fd45912c6f9f50d943d, type: 3}
-      propertyPath: healthIcons.Array.data[1]
-      value: 
-      objectReference: {fileID: 260152926}
-    - target: {fileID: 2678030647418652388, guid: dd7bcf43fa5d6fd45912c6f9f50d943d, type: 3}
-      propertyPath: healthIcons.Array.data[2]
-      value: 
-      objectReference: {fileID: 1803517249}
     - target: {fileID: 2678030647418652397, guid: dd7bcf43fa5d6fd45912c6f9f50d943d, type: 3}
       propertyPath: m_Name
       value: Player
