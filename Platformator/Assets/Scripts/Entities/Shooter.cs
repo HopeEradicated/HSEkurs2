@@ -8,20 +8,25 @@ public class Shooter : MonoBehaviour
 
     public GameObject bulletSample;
     [SerializeField] private bool isFliped;
+    [SerializeField] private Animator shooterAnimator;
+    [SerializeField] private Transform shootPoint;
 
     private Coroutine bulletCoroutine; 
 
     private void Start() {
         isFliped = gameObject.GetComponent<SpriteRenderer>().flipX;
-        StartCoroutine(CreateBullet());
+        StartCoroutine(Shooting());
     }
 
-    private IEnumerator CreateBullet() {
+    private IEnumerator Shooting() {
         while (true) {
             yield return new WaitForSeconds(waitTime);
-
-            GameObject curBullet = Instantiate(bulletSample, gameObject.transform.position, gameObject.transform.rotation);
-            curBullet.GetComponent<Bullet>().SetIsFliped(!isFliped);
+            shooterAnimator.Play("ArcherAttack");
         }
+    }
+
+    private void CreateBullet() {
+        GameObject curBullet = Instantiate(bulletSample, shootPoint.position, Quaternion.identity);
+        curBullet.GetComponent<Bullet>().SetIsFliped(!isFliped);
     }
 }

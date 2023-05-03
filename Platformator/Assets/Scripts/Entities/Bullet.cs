@@ -9,6 +9,7 @@ public class Bullet : MonoBehaviour
 
     public void SetIsFliped(bool isFliped) {
         parentFlipedX = isFliped;
+        gameObject.GetComponent<SpriteRenderer>().flipX = !isFliped;
     }
 
     private void Start() {

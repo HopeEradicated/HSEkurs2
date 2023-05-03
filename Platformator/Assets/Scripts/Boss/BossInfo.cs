@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class BossInfo : MonoBehaviour
 {
     private float primaryHealth;
-    private float health = 100f;
+    public float health = 100f;
     [SerializeField] private Image BossHealthBar;
 
     private void Start() {
@@ -14,6 +14,9 @@ public class BossInfo : MonoBehaviour
     public void ChangeBossHealth(float number) {
         health += number;
         FillHealthBar();
+        if (isBossHealhEqualLessThanZero()) {
+            Die();
+        }
     }
 
     private void FillHealthBar() {
@@ -26,5 +29,13 @@ public class BossInfo : MonoBehaviour
 
     public float GetBossPrimaryHealth() {
         return primaryHealth;
+    }
+
+    public bool isBossHealhEqualLessThanZero() {
+        return (health <= 0f);
+    }
+
+    private void Die() {
+        Destroy(gameObject);
     }
 }

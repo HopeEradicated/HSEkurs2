@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Warrior : MonoBehaviour
 {
-    private float warriorSpeed = 1f;
+    private float warriorSpeed = 0.5f;
     [SerializeField] private SpriteRenderer unitSprite;
+    [SerializeField] private Rigidbody2D warriorRb;
+    [SerializeField] private Animator warriorAnimator;
 
     private enum Status {
         Patrolling, Attacking
@@ -17,12 +19,13 @@ public class Warrior : MonoBehaviour
 
     private void Patrolling() {
         int modficator = 0; 
-        if (unitSprite.flipX) {
+        if (!unitSprite.flipX) {
             modficator = 1;
         } else {
             modficator = -1;
         }
-        gameObject.transform.position = new Vector2(gameObject.transform.position.x + modficator * warriorSpeed * Time.deltaTime, gameObject.transform.position.y);
+        warriorRb.velocity = new Vector2(modficator * warriorSpeed, warriorRb.velocity.y);
+        warriorAnimator.SetFloat("velocityHorizontal", Mathf.Abs(warriorRb.velocity.x));
     }
 
     private void OnCollisionEnter2D(Collision2D other) {

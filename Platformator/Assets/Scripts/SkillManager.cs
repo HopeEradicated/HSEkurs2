@@ -22,22 +22,21 @@ public class SkillManager : MonoBehaviour
 {
     public List<SkillArray> skillArr = new List<SkillArray>();
     public List<Skill> skillList = new List<Skill>();
-    public List<string> selectedSkill = new List<string>();
-    private GameObject Player;
+    [Header("InteriaPrefab")]
     public TextMeshProUGUI nameTextBox;
     public TextMeshProUGUI descTextBox;
     public TextMeshProUGUI countBox;
+
+    private List<string> selectedSkill = new List<string>();
+    private GameObject Player;
     private float delayTimer = 0.0f, delayTime = 0.3f;
-    public List<int> Used = new List<int>();
+    private List<int> Used = new List<int>();
     int curPosition = 0, curSelected = 0, rand = 0;
 
     private void Start()
     {
         skillList[0].SelectedUpdate();
-        nameTextBox.text = skillList[curPosition].skillName;
-        descTextBox.text = skillList[curPosition].skillDescription;
         Player = GameObject.FindGameObjectWithTag("Player");
-        countBox.text = curSelected + " / " + Player.GetComponent<Player>().gainedLevel;
 
         string path = "Assets/Resources/Skills.txt";
 
@@ -74,6 +73,9 @@ public class SkillManager : MonoBehaviour
             skillList[i].skillDescription = skillArr[rand-1].skillDescription;
             Used.Add(rand); 
         }
+        nameTextBox.text = skillList[curPosition].skillName;
+        descTextBox.text = skillList[curPosition].skillDescription;
+        countBox.text = curSelected + " / " + Player.GetComponent<Player>().stats.gainedLevel;
     }
 
     private void Update()
@@ -81,11 +83,11 @@ public class SkillManager : MonoBehaviour
         delayTimer += Time.deltaTime;
         if (delayTimer >= delayTime) {
             if (Input.GetKey(KeyCode.Return) || Input.GetKey(KeyCode.KeypadEnter)) {
-                if ((skillList[curPosition].applied && Player.GetComponent<Player>().gainedLevel == curSelected)) {
+                if ((skillList[curPosition].applied && Player.GetComponent<Player>().stats.gainedLevel == curSelected)) {
                     curSelected -= 1;
                     skillList[curPosition].AppliedUpdate();
                 }
-                else if (Player.GetComponent<Player>().gainedLevel > curSelected ) {
+                else if (Player.GetComponent<Player>().stats.gainedLevel > curSelected ) {
                     if (skillList[curPosition].applied ) 
                         curSelected -= 1;
                     else
@@ -95,7 +97,7 @@ public class SkillManager : MonoBehaviour
                 delayTimer = 0.0f;
             }
             if (Input.GetKey(KeyCode.E)) {
-                Player.GetComponent<Player>().gainedLevel -= curSelected;
+                Player.GetComponent<Player>().stats.gainedLevel -= curSelected;
                 for(int i=0; i<skillList.Count; i++)
                     if (skillList[i].applied) selectedSkill.Add(skillList[i].skillName);
                 Player.GetComponent<Player>().UpdateSkills(selectedSkill);
@@ -118,7 +120,7 @@ public class SkillManager : MonoBehaviour
                 nameTextBox.text = skillList[curPosition].skillName;
                 delayTimer = 0.0f;
             } 
-            countBox.text = curSelected + " / " + Player.GetComponent<Player>().gainedLevel;
+            countBox.text = curSelected + " / " + Player.GetComponent<Player>().stats.gainedLevel;
         }        
     }
 }

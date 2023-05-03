@@ -543,6 +543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b53b61a153896c41a87f001f126e7e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthPoints: 3
   gainedLevel: 0
   selectedSkills: []
 --- !u!114 &532534771
@@ -572,6 +573,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canJump: 0
   playerSprite: {fileID: 532534775}
+  playerAnimator: {fileID: 0}
 --- !u!50 &532534773
 Rigidbody2D:
   serializedVersion: 4
@@ -2069,13 +2071,21 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1818998590, guid: dd7bcf43fa5d6fd45912c6f9f50d943d, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678030647418652385, guid: dd7bcf43fa5d6fd45912c6f9f50d943d, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 2678030647418652387, guid: dd7bcf43fa5d6fd45912c6f9f50d943d, type: 3}
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2678030647418652387, guid: dd7bcf43fa5d6fd45912c6f9f50d943d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.9
+      value: 4.79
       objectReference: {fileID: 0}
     - target: {fileID: 2678030647418652387, guid: dd7bcf43fa5d6fd45912c6f9f50d943d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2116,6 +2126,10 @@ PrefabInstance:
     - target: {fileID: 2678030647418652397, guid: dd7bcf43fa5d6fd45912c6f9f50d943d, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678030647418652397, guid: dd7bcf43fa5d6fd45912c6f9f50d943d, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

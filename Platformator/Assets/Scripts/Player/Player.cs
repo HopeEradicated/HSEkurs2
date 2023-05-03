@@ -7,10 +7,14 @@ using UnityEngine;
 public class PlayerStats
 {
     public int level = 0;
+    public int money = 0;
     public int expPoints = 0;
     public int expCurMax = 100;
     public int gainedLevel = 0;
     public List<string> selectedSkills = new List<string>();
+    public List<string> selectedPerks = new List<string>();
+
+    public PlayerStats() {}
     public string SaveToString()
     {
         return JsonUtility.ToJson(this);
@@ -20,14 +24,14 @@ public class PlayerStats
 public class Player : MonoBehaviour
 {
     private GameObject[] OldPlayer;
-    private int healthPoints = 3;
-    private int level = 0;
-    private int expPoints = 0;
-    private int expCurMax = 100;
-    public int gainedLevel = 0;
-    public List<string> selectedSkills = new List<string>();
-    private string path = "Assets/Resources/PlayerStats.txt";
+    public int healthPoints = 3;
     private GameObject[] healthIcons;
+
+    public PlayerStats stats = new PlayerStats();
+
+    private bool isPlayerInvulnerable;
+
+    private string path = "Assets/Resources/PlayerStats.txt";
 
     void Awake() {
         DontDestroyOnLoad(transform.gameObject);
@@ -35,71 +39,82 @@ public class Player : MonoBehaviour
 
     private void Start() {
         healthIcons = GameObject.FindGameObjectsWithTag("Health");
-        LoadVar();
-        //OldPlayer = GameObject.FindGameObjectsWithTag("Player");
-        //if (OldPlayer.Length > 1)
-            //if (OldPlayer[0] != null) {
-                //OldPlayer[0].GetComponent<Player>().UnloadVar();
-                //LoadVar();
-            //}
+        if (File.Exists(path))
+            LoadVar();
     }
 
     public void UnloadVar() {
-        StreamWriter writer = new StreamWriter(path);
-        PlayerStats temp = new PlayerStats();
-        temp.level = level;
-        temp.expPoints = expPoints;
-        temp.expCurMax = expCurMax;
-        temp.gainedLevel = gainedLevel;
-        temp.selectedSkills = selectedSkills;
-        writer.WriteLine(temp.SaveToString());
-        writer.Close();
+        string data = stats.SaveToString();
+        using (StreamWriter writer = new StreamWriter(path)) {
+            writer.WriteLine(data);
+        }
         Destroy(gameObject);
     }
 
     public void LoadVar() {
-        StreamReader reader = new StreamReader(path); 
-        while(!reader.EndOfStream) {
-            PlayerStats temp = new PlayerStats();
-            JsonUtility.FromJsonOverwrite(reader.ReadLine(), temp);
-            level = temp.level;
-            expPoints = temp.expPoints;
-            expCurMax = temp.expCurMax;
-            gainedLevel = temp.gainedLevel;
-            selectedSkills = temp.selectedSkills ;
+        using (StreamReader reader = new StreamReader(path)) {
+            while(!reader.EndOfStream) {
+                JsonUtility.FromJsonOverwrite(reader.ReadLine(), stats);
+            }
         }
-        reader.Close();
     }
 
     public void UpdateSkills(List<string> Skills) {
-        for(int i=0; i<Skills.Count; i++)
-            selectedSkills.Add(Skills[i]);
+        stats.selectedSkills.AddRange(Skills);
     }
 
+    public void UpdatePerks(List<string> Perks) {
+        stats.selectedPerks = Perks;
+    }
 
     public void ChangeHealthPoints(int number) {
-        if (healthPoints + number >= 0 && healthPoints + number <= 3) {
+        if (healthPoints + number >= 0 && healthPoints + number <= 3 && !isPlayerInvulnerable) {
             UpdateHealthBar(healthPoints + (number - 1 * Mathf.Abs(number)) / 2, (number > 0));
             healthPoints += number;
+            if (number < 0) {
+                VisualizeDamage();
+
+                isPlayerInvulnerable = true;
+                Invoke("MakePlayerVulnerable", 3f);
+            }
         }
     }
 
+    private void MakePlayerVulnerable() {
+        isPlayerInvulnerable = false;
+    }
+
+    private void VisualizeDamage() {
+        SpriteRenderer entitySR = gameObject.GetComponent<SpriteRenderer>();
+        Color entityColor =  entitySR.color;
+        entityColor.a = 0.7f;
+        entitySR.color = entityColor;
+        Invoke("SetDefultOpacity", 0.2f);
+    }
+
+    private void SetDefultOpacity() {
+        SpriteRenderer entitySR = gameObject.GetComponent<SpriteRenderer>();
+        Color entityColor =  entitySR.color;
+        entityColor.a = 255;
+        entitySR.color = entityColor;
+    }
+
     public void ChangeExperiencePoints(int number) {
-        expPoints += number;
+        stats.expPoints += number;
         levelUp();
     }
 
     public void ChangeLevel(int number) {
-        level += number;
-        expCurMax = 100 + 100 * level;
-        gainedLevel += 1;
+        stats.level += number; 
+        stats.expCurMax = 100 + 100 * stats.level;
+        stats.gainedLevel += 1;
     }
 
     public void levelUp() {
-        if (expPoints == expCurMax) {
-            level += 1;
-            gainedLevel += 1;
-            expCurMax = 100 + 100 * level;
+        if (stats.expPoints >= stats.expCurMax) {
+            stats.level += 1;
+            stats.gainedLevel += 1;
+            stats.expCurMax = 100 + 100 * stats.level;
         }
     }
 
@@ -107,7 +122,7 @@ public class Player : MonoBehaviour
         healthIcons[index].SetActive(isActive);
     }
 
-    public bool isHealhEqualToZero() {
+    public bool IsHealhEqualToZero() {
         return (healthPoints == 0);
     }
 }

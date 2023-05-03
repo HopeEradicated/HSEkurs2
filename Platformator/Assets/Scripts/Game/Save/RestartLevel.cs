@@ -1,4 +1,3 @@
-using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class RestartLevel : MonoBehaviour
@@ -14,7 +13,7 @@ public class RestartLevel : MonoBehaviour
     }
 
     private void Update() {
-        if (playerInfo.isHealhEqualToZero()) {
+        if (playerInfo.IsHealhEqualToZero()) {
             Destroy(roomsHolder);
             roomsHolder = generatedLevel;
             generatedLevel.SetActive(true);

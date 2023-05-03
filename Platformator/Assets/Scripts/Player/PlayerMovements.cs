@@ -14,8 +14,8 @@ public class PlayerMovements : MonoBehaviour
     public bool canJump;
 
     private BoxCollider2D playerCol2D;
-    [SerializeField]
-    private SpriteRenderer playerSprite;
+    [SerializeField] private SpriteRenderer playerSprite;
+    [SerializeField] private Animator playerAnimator;
 
     private void Start() {
         playerCoords = GetComponent<Transform>();
@@ -38,10 +38,13 @@ public class PlayerMovements : MonoBehaviour
         hDirection = Input.GetAxisRaw("Horizontal") * plSpeed;
         
         if (hDirection < 0) {
-            playerSprite.flipX = true;
+            //playerSprite.flipX = true;
+            transform.rotation = Quaternion.Euler(0,0,0);
         } else if (hDirection > 0){
-            playerSprite.flipX = false;
+            //playerSprite.flipX = false;
+            transform.rotation = Quaternion.Euler(0,180,0);
         }
+        playerAnimator.SetFloat("velocityHorizontal", Mathf.Abs(hDirection));
         /*Оставить, как альтернативную физику движения, для другого персонажа или класса, например
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)){
             StrafeToTheRight();

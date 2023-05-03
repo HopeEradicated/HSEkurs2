@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,30 +18,24 @@ public class Skill : MonoBehaviour
     }
 
     private void Update() {
+        Color c = image.color;
         if(selected && applied) {
-            Color c = image.color;
             back.color = Color.green;
             c.a = 1;
-            image.color = c; 
         }
         if(!selected && applied) {
-            Color c = image.color;
             back.color = Color.green;
             c.a = 0.5f;
-            image.color = c; 
         }
         if(selected && !applied) {
-            Color c = image.color;
             back.color = Color.yellow;
             c.a = 1;
-            image.color = c; 
         }
         if(!selected && !applied) {
-            Color c = image.color;
             back.color = Color.black;
-            c.a = 0.5f;
-            image.color = c; 
+            c.a = 0.5f;           
         }
+        image.color = c;
     }
 
     public void SelectedUpdate() {
