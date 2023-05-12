@@ -8,6 +8,8 @@ public class Portal : MonoBehaviour
     private int levelsToBoss = 5;
     private string path = "Assets/Resources/GameSP.txt";
 
+    [SerializeField] private AudioSource portalAudioSource;
+
     private void Start() {
         if (File.Exists(path))
             using (StreamReader reader = new StreamReader(path))
@@ -18,6 +20,18 @@ public class Portal : MonoBehaviour
     private void OnTriggerStay2D(Collider2D other) {
         if (Input.GetKey(KeyCode.E) && other.gameObject.tag == "Player") {
             LoadNextLevel();
+        }
+    }
+    
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.tag == "PlayerField") {
+            portalAudioSource.Play();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other) {
+        if (other.gameObject.tag == "PlayerField") {
+            portalAudioSource.Pause();
         }
     }
 

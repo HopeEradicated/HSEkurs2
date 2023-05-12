@@ -20,15 +20,16 @@ TagManager:
   - Missile
   - Boss
   - Enemy
+  - Perk
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Entity
+  - Player
   - Water
   - UI
-  - 
-  - 
+  - Entity
+  - Platform
   - 
   - 
   - 

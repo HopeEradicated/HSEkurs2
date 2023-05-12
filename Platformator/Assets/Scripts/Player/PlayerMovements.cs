@@ -6,16 +6,24 @@ public class PlayerMovements : MonoBehaviour
     Transform playerCoords;
     Rigidbody2D playerRb;
 
-    private float vForce = 450f/*Мб поменять название*/, hForce = 2f, plSpeed = 6f;
+    public float vForce = 450f/*Мб поменять название*/;
+    private float hForce = 2f, plSpeed = 6f;
     private float hDirection = 0f, wallDirIndex = -0.1f;
     private float wallCheckDist = 1f;
     private bool isOnWall;
     [HideInInspector]
     public bool canJump;
+    //[HideInInspector]
+    public bool isGrounded;
+    [HideInInspector]
+    public AudioClip stepSound;
 
     private BoxCollider2D playerCol2D;
     [SerializeField] private SpriteRenderer playerSprite;
     [SerializeField] private Animator playerAnimator;
+    [Header("Audio")]
+    [SerializeField] private AudioSource footAudioSource;
+    [SerializeField] private AudioClip jumpSound;
 
     private void Start() {
         playerCoords = GetComponent<Transform>();
@@ -36,15 +44,22 @@ public class PlayerMovements : MonoBehaviour
             }
         }
         hDirection = Input.GetAxisRaw("Horizontal") * plSpeed;
-        
-        if (hDirection < 0) {
-            //playerSprite.flipX = true;
-            transform.rotation = Quaternion.Euler(0,0,0);
-        } else if (hDirection > 0){
-            //playerSprite.flipX = false;
-            transform.rotation = Quaternion.Euler(0,180,0);
+        if (hDirection != 0) {
+
+            if (hDirection < 0) {
+                //playerSprite.flipX = true;
+                transform.rotation = Quaternion.Euler(0,0,0);
+            } else if (hDirection > 0){
+                //playerSprite.flipX = false;
+                transform.rotation = Quaternion.Euler(0,180,0);
+            }
         }
-        playerAnimator.SetFloat("velocityHorizontal", Mathf.Abs(hDirection));
+        if (isGrounded) {
+            playerAnimator.SetFloat("velocityHorizontal", Mathf.Abs(hDirection));
+        } else {
+            playerAnimator.SetFloat("velocityHorizontal", 0); 
+        }
+
         /*Оставить, как альтернативную физику движения, для другого персонажа или класса, например
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)){
             StrafeToTheRight();
@@ -73,7 +88,9 @@ public class PlayerMovements : MonoBehaviour
     }
 
     private void Jump(){
-        playerRb.AddForce(playerCoords.up * vForce);
+        footAudioSource.clip = jumpSound;
+        footAudioSource.Play();
+        playerRb.AddForce(Vector2.up * vForce);
     }
 
     private void StrafeToTheRight(){
@@ -82,6 +99,13 @@ public class PlayerMovements : MonoBehaviour
 
     private void StrafeToTheLeft(){
         playerRb.AddForce(playerCoords.right * -1 * hForce);
+    }
+
+    private void PlayStepSound() {
+        if (isGrounded) {
+            footAudioSource.clip = stepSound;
+            footAudioSource.Play();
+        }
     }
 
     private void OnCollisionStay2D(Collision2D other) {

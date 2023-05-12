@@ -52,9 +52,9 @@ public class SpawnObjects : MonoBehaviour
             if (enemySpawnPoints[index2] != null) {
                 if (rand2 < enemyRandBorder) {
                     rand2 = Random.Range(0, enemySamples.Count);
-                    GameObject curEnemy = Instantiate(enemySamples[rand2], enemySpawnPoints[index2].transform.position, enemySpawnPoints[index2].transform.rotation);
+                    GameObject curEnemy = Instantiate(enemySamples[rand2], enemySpawnPoints[index2].transform.position, Quaternion.identity);
                     curEnemy.transform.SetParent(enemySpawnPoints[index2].transform.parent);
-                    if (curEnemy.transform.localPosition.x > 0) {
+                    if (curEnemy.transform.localPosition.x > 0 && curEnemy.name == "Shooter(Clone)") {
                         curEnemy.GetComponent<SpriteRenderer>().flipX = true;
                     }
                     enemyCounter++;

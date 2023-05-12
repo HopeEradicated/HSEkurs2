@@ -8,6 +8,10 @@ public class EnemyEntity : MonoBehaviour
     public float value;
     private float riskCoef;
     private GameObject Player;
+    [Header("Audio")]
+    [SerializeField] private AudioSource bodyAudioSource;
+    [SerializeField] private AudioClip hitSound;
+    [SerializeField] private AudioClip deathSound;
 
     void Start()
     {
@@ -26,11 +30,15 @@ public class EnemyEntity : MonoBehaviour
     }
 
     private void Die() {
-        Destroy(gameObject);
+        bodyAudioSource.clip = deathSound;
+        bodyAudioSource.Play();
+        Destroy(gameObject, 0.4f);
     }
 
     private void VisualizeDamage() {
         SpriteRenderer entitySR = gameObject.GetComponent<SpriteRenderer>();
+        bodyAudioSource.clip = hitSound;
+        bodyAudioSource.Play();
         Color entityColor =  entitySR.color;
         entityColor.a = 0.7f;
         entitySR.color = entityColor;

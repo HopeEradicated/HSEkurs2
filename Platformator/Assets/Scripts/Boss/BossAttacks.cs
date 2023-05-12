@@ -7,6 +7,12 @@ public class BossAttacks : MonoBehaviour
     [SerializeField] private GameObject missileSample;
     [SerializeField] private BossInfo bossInfo;
     [SerializeField] private Animator bossAnimator;
+    [Header("Sounds")]
+    [SerializeField] private AudioSource bossAudioSource;
+    [SerializeField] private AudioSource attackAudioSource;
+    [SerializeField] private AudioClip rageSound;
+    [SerializeField] private AudioClip specialAttackSound;
+
     private Coroutine attackCoroutine;
 
     private float missileSpeed = 6f;
@@ -26,9 +32,9 @@ public class BossAttacks : MonoBehaviour
 
     private void Update() {
         if (bossInfo.GetBossHealth() < bossInfo.GetBossPrimaryHealth() - healthStep && !isBossHealthLessThanAHalf) {
-            //StopCoroutine(attackCoroutine);
+            bossAudioSource.clip = rageSound;
+            bossAudioSource.Play();
             attackIndex++;
-            //attackCoroutine = StartCoroutine(attackNames[attackIndex]);
             isBossHealthLessThanAHalf = true;
 
             InvokeSpecialAttackWithDelay();
@@ -91,6 +97,7 @@ public class BossAttacks : MonoBehaviour
 
         Rigidbody2D newMissileRb = newMissile.GetComponent<Rigidbody2D>();
         newMissileRb.velocity = new Vector2(randModifier * playerPos.x - transform.position.x, playerPos.y - transform.position.y).normalized * missileSpeed * speedMod;
+        attackAudioSource.Play();
     }
 
     private void CallAttackNTimes(string attackName, int n, float timeStep) {
@@ -105,7 +112,10 @@ public class BossAttacks : MonoBehaviour
         StopCoroutine(attackCoroutine);
         int rand = Random.Range(0, specialAttackNames.Count);
         int amountOfRepeats = 10;
-        
+
+        bossAudioSource.clip = specialAttackSound;
+        bossAudioSource.Play();
+
         CallAttackNTimes(specialAttackNames[rand], amountOfRepeats, specialAttackTimeSteps[rand]);
         Invoke("ResumeDefultAttack", amountOfRepeats* specialAttackTimeSteps[rand]);
     }

@@ -11,4 +11,17 @@ public class CheckForTheGround : MonoBehaviour
             playerMovements.canJump = true;
         }
     }
+
+    private void OnTriggerStay2D(Collider2D other) {
+        if (other.gameObject.tag == "Ground" || other.gameObject.tag == "Border" ) {
+            playerMovements.stepSound = other.gameObject.GetComponent<Ground>().stepSound;
+            playerMovements.isGrounded = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other) {
+        if (other.gameObject.tag == "Ground" || other.gameObject.tag == "Border" ) {
+            playerMovements.isGrounded = false;
+        }
+    }
 }

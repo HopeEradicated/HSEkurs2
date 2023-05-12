@@ -5,16 +5,16 @@ using UnityEngine;
 public class BreakThePlatform : MonoBehaviour
 {
     [SerializeField] private List<Sprite> platformSprites;
+    [SerializeField] private AudioSource platfromAudioSource;
     //Заводим счётчик, который будет хранить, сколько раз мы наступили на платформу
     private int touchesCounter = 0;
     private int breakPoint = 3;
 
-    private void OnCollisionEnter2D(Collision2D other) {
+    public void HandleTheTouch() {
         //Если соприкосновение было с игроком, то увеличиваем счётчик
-        if (other.gameObject.tag == "Player") {
-            touchesCounter++;
-            SetNextSprite();
-        }
+        touchesCounter++;
+        platfromAudioSource.Play();
+        SetNextSprite();
     }
 
     private void Update() {

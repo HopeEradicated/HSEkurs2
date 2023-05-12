@@ -15,7 +15,10 @@ public class RoomGenerator : MonoBehaviour
     [SerializeField] private GameObject rightBorderRooom;
     [SerializeField] private GameObject leftBorderRooom;
     [SerializeField] private GameObject bottomBorderRooom;
-
+    [Header("TreasureRoomsPrefabs")]
+    [SerializeField] private GameObject rightTreasureRooom;
+    [SerializeField] private GameObject leftTreasureRooom;
+ 
     private int rand;
     public bool spawned = false;
     private int spawnBorder = 25;
@@ -58,14 +61,24 @@ public class RoomGenerator : MonoBehaviour
                     rand = UnityEngine.Random.Range(0, variants.rightRooms.Count);
                     newRoom = Instantiate(variants.rightRooms[rand], transform.position, Quaternion.identity);
                 } else {
-                    newRoom = Instantiate(rightBorderRooom, transform.position, Quaternion.identity);
+                    rand = UnityEngine.Random.Range(0, 100);
+                    if (rand > 10) {
+                        newRoom = Instantiate(rightBorderRooom, transform.position, Quaternion.identity);
+                    } else {
+                        newRoom = Instantiate(rightTreasureRooom, transform.position, Quaternion.identity);
+                    }
                 }
             } else if (direction == Direction.Left) {
                 if (roomCounter < spawnBorder) {
                     rand = UnityEngine.Random.Range(0, variants.leftRooms.Count);
                     newRoom = Instantiate(variants.leftRooms[rand], transform.position, Quaternion.identity);
                 } else {
-                    newRoom = Instantiate(leftBorderRooom, transform.position, Quaternion.identity);
+                    rand = UnityEngine.Random.Range(0, 100);
+                    if (rand > 10) {
+                        newRoom = Instantiate(leftBorderRooom, transform.position, Quaternion.identity);
+                    } else {
+                        newRoom = Instantiate(leftTreasureRooom, transform.position, Quaternion.identity);
+                    }
                 }
             } else if (direction == Direction.Bottom) {
                 if (roomCounter < spawnBorder) {

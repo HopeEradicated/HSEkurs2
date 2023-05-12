@@ -5,6 +5,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private GameObject missileSample;
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private GameObject damageField;
+    [SerializeField] private AudioSource weaponAudioSource;
     
     public float missileSpeed = 11f;
     private bool canAttack = true; 
@@ -25,7 +26,8 @@ public class PlayerAttack : MonoBehaviour
     }*/
 
     private void MeleeAttack() {
-        playerAnimator.Play("Attack");    
+        playerAnimator.Play("Attack");
+        weaponAudioSource.Play();   
     }
 
     private void AttackDelay() {

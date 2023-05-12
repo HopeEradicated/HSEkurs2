@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7559283771557232436}
   m_Layer: 0
   m_Name: RightSpawnPoint
-  m_TagString: Untagged
+  m_TagString: RoomPoint
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,5 +97,7 @@ MonoBehaviour:
   rightBorderRooom: {fileID: 510064075955074382, guid: 89168b57d634eb748a63034f5ca18ed5, type: 3}
   leftBorderRooom: {fileID: 5256479452099694753, guid: 9271b2af9fd606b41badca09ffc0d2c8, type: 3}
   bottomBorderRooom: {fileID: 6559366988011668946, guid: c067fd62a9a74324681962c39be0ec17, type: 3}
+  rightTreasureRooom: {fileID: 510064075955074382, guid: 573c2c953bbf1f4488fb5353bb5927bc, type: 3}
+  leftTreasureRooom: {fileID: 5256479452099694753, guid: a7752dc3ff9f9b849a6adfd85b381d5f, type: 3}
   spawned: 0
   direction: 1
