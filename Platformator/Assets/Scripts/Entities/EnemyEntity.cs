@@ -24,6 +24,8 @@ public class EnemyEntity : MonoBehaviour
             VisualizeDamage();
         }
         if (health <= 0) {
+            if (Player.GetComponent<Player>().stats.selectedPerks.IndexOf("More gold") != -1) 
+                Player.GetComponent<Player>().stats.money += 1;
             Player.GetComponent<Player>().stats.money += 1;
             Die();
         }

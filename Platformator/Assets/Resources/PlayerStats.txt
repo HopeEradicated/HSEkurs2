@@ -1,0 +1,1 @@
+{"level":5,"money":222,"expPoints":500,"expCurMax":600,"gainedLevel":1,"selectedSkills":["Ref"],"selectedPerks":["Damage Up I","Damage Up II","Damage Up III","Sling","Heal","Normal mod","More gold","Hard mod","More XP"]}

@@ -23,25 +23,49 @@ public class PlayerStats
 
 public class Player : MonoBehaviour
 {
-    private GameObject[] OldPlayer;
-    public int healthPoints = 3;
+    private string path = "Assets/Resources/PlayerStats.txt";
+
+    public int healthPoints = 3, healthcap = 0;
     private GameObject[] healthIcons;
 
     public PlayerStats stats = new PlayerStats();
 
     private bool isPlayerInvulnerable;
 
-    private string path = "Assets/Resources/PlayerStats.txt";
-
     void Awake() {
         DontDestroyOnLoad(transform.gameObject);
     }
 
     private void Start() {
-        healthIcons = GameObject.FindGameObjectsWithTag("Health");
         if (File.Exists(path))
             LoadVar();
+        healthIcons = GameObject.FindGameObjectsWithTag("Health");
+        if (stats.selectedPerks.IndexOf("Strange I") != -1) 
+            healthPoints = 4; 
+        if (stats.selectedPerks.IndexOf("Strange II") != -1) 
+            healthPoints = 5;
+        if (stats.selectedPerks.IndexOf("Strange III") != -1) 
+            healthPoints = 6;  
+        ChangeHealthPoints(6);
+        for(int i=0; i<6; i++) {
+            healthcap++;
+            if(i>=healthPoints)
+                healthIcons[i].SetActive(false);
+        }
     }
+
+    /*
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open("C:/Unity/MySaveData.dat", FileMode.Open);
+            SaveData data = (SaveData)bf.Deserialize(file);
+            file.Close();
+
+            BinaryFormatter bf = new BinaryFormatter(); 
+            FileStream file = File.Create("C:/Unity/MySaveData.dat"); 
+            SaveData data = new SaveData()
+            bf.Serialize(file, data);
+            file.Close();
+    */
 
     public void UnloadVar() {
         string data = stats.SaveToString();
@@ -52,11 +76,9 @@ public class Player : MonoBehaviour
     }
 
     public void LoadVar() {
-        using (StreamReader reader = new StreamReader(path)) {
-            while(!reader.EndOfStream) {
+        using (StreamReader reader = new StreamReader(path))
+            while(!reader.EndOfStream)
                 JsonUtility.FromJsonOverwrite(reader.ReadLine(), stats);
-            }
-        }
     }
 
     public void UpdateSkills(List<string> Skills) {
@@ -68,12 +90,13 @@ public class Player : MonoBehaviour
     }
 
     public void ChangeHealthPoints(int number) {
-        if (healthPoints + number >= 0 && healthPoints + number <= 3 && !isPlayerInvulnerable) {
+        if (number >= healthcap)
+            number = healthcap;
+        if (healthPoints + number >= 0 && !isPlayerInvulnerable) {
             UpdateHealthBar(healthPoints + (number - 1 * Mathf.Abs(number)) / 2, (number > 0));
             healthPoints += number;
             if (number < 0) {
                 VisualizeDamage();
-
                 isPlayerInvulnerable = true;
                 Invoke("MakePlayerVulnerable", 3f);
             }

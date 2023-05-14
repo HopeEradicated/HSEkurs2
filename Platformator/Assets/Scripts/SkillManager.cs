@@ -11,9 +11,7 @@ public class SkillArray
 {
     public string skillName = "";
     public string skillDescription = "";
-    //public List<int> skillSpecs = null;
-    public string SaveToString()
-    {
+    public string SaveToString() {
         return JsonUtility.ToJson(this);
     }
 }
@@ -67,8 +65,8 @@ public class SkillManager : MonoBehaviour
                 rand = UnityEngine.Random.Range(1,5+1); //skillArr.Count+1);
                 if (Used.IndexOf(rand) == -1 && selectedSkill.IndexOf(skillArr[rand].skillName) == -1) break;   
             } while (true);
-            Sprite skillSprite = Resources.Load <Sprite> ("Sprites/Skill" + rand);    
-            skillList[i].transform.Find("Image").GetComponent<Image>().sprite = skillSprite;
+            Sprite skillSprite = Resources.Load <Sprite> ("Sprites/Skills/Skill" + rand);    
+            skillList[i].transform.Find("Image").GetComponent<SpriteRenderer>().sprite = skillSprite;
             skillList[i].skillName = skillArr[rand-1].skillName;
             skillList[i].skillDescription = skillArr[rand-1].skillDescription;
             Used.Add(rand); 

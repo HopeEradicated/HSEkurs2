@@ -28,6 +28,10 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.tag == "Player") {
             Debug.Log("Hit the player");
+            if (other.gameObject.GetComponent<Player>().stats.selectedPerks.IndexOf("Normal mod") != -1) 
+                other.gameObject.GetComponent<Player>().ChangeHealthPoints(-1);
+            if (other.gameObject.GetComponent<Player>().stats.selectedPerks.IndexOf("Hard mod") != -1) 
+                other.gameObject.GetComponent<Player>().ChangeHealthPoints(-1);
             other.gameObject.GetComponent<Player>().ChangeHealthPoints(-1);
         } else if (other.gameObject.tag == "Wall") {
             gameObject.SetActive(false);

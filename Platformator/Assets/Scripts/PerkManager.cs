@@ -25,10 +25,10 @@ public class PerkManager : MonoBehaviour
         perks = GameObject.FindGameObjectsWithTag("Perk");
         foreach (GameObject perk in perks) {
             tempPerk = perk.GetComponent<Perk>();
-            if(selectedPerks.IndexOf(tempPerk.perkName) != -1) 
-                tempPerk.perkSelected = true; 
-                
+            if(Player.GetComponent<Player>().stats.selectedPerks.IndexOf(tempPerk.perkName) != -1) 
+                tempPerk.perkSelected = true;      
         } 
+        countBox.text = "5 / " + Player.GetComponent<Player>().stats.money;
         buyButton.onClick.AddListener(BuyButtonOnClick); 
     }
 

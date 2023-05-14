@@ -7,23 +7,49 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private GameObject damageField;
     [SerializeField] private AudioSource weaponAudioSource;
     
-    public float missileSpeed = 11f;
+    public float missileSpeed = 10f;
     private bool canAttack = true; 
+    private bool healed = false;
+    private int invuled = 0;
+    private GameObject Player;
 
-    private void Update() {
+    private void Start() {
+        Player = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    private void Update() {   
+        if (Input.GetKey(KeyCode.Q)){
+            /*
+            */
+        }
+        if (Input.GetKey(KeyCode.F) && !healed){
+            Player.GetComponent<Player>().ChangeHealthPoints(5);
+            healed = true;
+            Debug.Log("HEALED");
+        }
+        if (Input.GetKey(KeyCode.E)){
+            /*
+            */
+        }
         if (Input.GetButton("Fire1") && canAttack) {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
             MeleeAttack();
             canAttack = false;
             Invoke("AttackDelay", 1f);
         }
+        if (Input.GetButton("Fire2") && canAttack) {
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            Shoot(mousePos);
+            canAttack = false;
+            Invoke("AttackDelay", 1f);
+        }
     }
 
-    /*private void Shoot(Vector2 mousePos) {
+    private void Shoot(Vector2 mousePos) {
             GameObject newMissile = Instantiate(missileSample, transform.position, Quaternion.identity);
             Rigidbody2D missileRb = newMissile.GetComponent<Rigidbody2D>();
             missileRb.velocity = mousePos.normalized * missileSpeed; 
-    }*/
+    }
 
     private void MeleeAttack() {
         playerAnimator.Play("Attack");
