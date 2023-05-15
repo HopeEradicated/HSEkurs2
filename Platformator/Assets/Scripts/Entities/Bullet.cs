@@ -14,8 +14,6 @@ public class Bullet : MonoBehaviour
 
     private void Start() {
         Rigidbody2D bulletRb = gameObject.GetComponent<Rigidbody2D>();
-        //parentFlipedX = gameObject.transform.parent.gameObject.GetComponent<SpriteRenderer>().flipX;
-
         if (parentFlipedX) {
             direction = 1;
         } else {
@@ -28,11 +26,12 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.tag == "Player") {
             Debug.Log("Hit the player");
+            int sumHit = 1;
             if (other.gameObject.GetComponent<Player>().stats.selectedPerks.IndexOf("Normal mod") != -1) 
-                other.gameObject.GetComponent<Player>().ChangeHealthPoints(-1);
+                sumHit++;
             if (other.gameObject.GetComponent<Player>().stats.selectedPerks.IndexOf("Hard mod") != -1) 
-                other.gameObject.GetComponent<Player>().ChangeHealthPoints(-1);
-            other.gameObject.GetComponent<Player>().ChangeHealthPoints(-1);
+                sumHit++;
+            other.gameObject.GetComponent<Player>().ChangeHealthPoints(-sumHit);
         } else if (other.gameObject.tag == "Wall") {
             gameObject.SetActive(false);
         }

@@ -6,7 +6,7 @@ public class PlayerMovements : MonoBehaviour
     Transform playerCoords;
     Rigidbody2D playerRb;
 
-    public float vForce = 450f/*Мб поменять название*/;
+    public float vForce = 450f;
     private float hForce = 2f, plSpeed = 6f;
     private float hDirection = 0f, wallDirIndex = -0.1f;
     private float wallCheckDist = 1f;
@@ -18,7 +18,8 @@ public class PlayerMovements : MonoBehaviour
     [HideInInspector]
     public AudioClip stepSound;
 
-    private BoxCollider2D playerCol2D;
+    [Header("PlayerSetup")]
+    [SerializeField] private BoxCollider2D playerCol2D;
     [SerializeField] private SpriteRenderer playerSprite;
     [SerializeField] private Animator playerAnimator;
     [Header("Audio")]
@@ -53,10 +54,8 @@ public class PlayerMovements : MonoBehaviour
         if (hDirection != 0) {
 
             if (hDirection < 0) {
-                //playerSprite.flipX = true;
                 transform.rotation = Quaternion.Euler(0,0,0);
             } else if (hDirection > 0){
-                //playerSprite.flipX = false;
                 transform.rotation = Quaternion.Euler(0,180,0);
             }
         }
@@ -64,20 +63,6 @@ public class PlayerMovements : MonoBehaviour
             playerAnimator.SetFloat("velocityHorizontal", Mathf.Abs(hDirection));
         } else {
             playerAnimator.SetFloat("velocityHorizontal", 0); 
-        }
-
-        /*Оставить, как альтернативную физику движения, для другого персонажа или класса, например
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)){
-            StrafeToTheRight();
-        }
-
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)){
-            StrafeToTheLeft();
-        }
-        */
-
-        if (Input.GetKey(KeyCode.F)){
-            playerCoords.localPosition = Vector3.Lerp(playerCoords.localPosition, new Vector3(0, 1f,0), 5f);
         }
     }
 

@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class PlayerMissile : MonoBehaviour
 {   
+    [SerializeField] private bool fireBall;
     private float missileDmg = 1f;
 
     private void Start() {
         GameObject Player = GameObject.FindGameObjectWithTag("Player");
-        if (Player.GetComponent<Player>().stats.selectedPerks.IndexOf("Sling") != -1) 
+        if (Player.GetComponent<Player>().stats.selectedPerks.IndexOf("Sling") != -1 && !fireBall) 
             missileDmg = 3f;
-        else if (Player.GetComponent<Player>().stats.selectedPerks.IndexOf("Fireball") != -1) 
+        else if (Player.GetComponent<Player>().stats.selectedPerks.IndexOf("Fireball") != -1 && fireBall) 
             missileDmg = 15f;
     }
 

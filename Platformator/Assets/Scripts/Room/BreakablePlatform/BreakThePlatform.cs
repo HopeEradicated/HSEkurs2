@@ -9,12 +9,24 @@ public class BreakThePlatform : MonoBehaviour
     //Заводим счётчик, который будет хранить, сколько раз мы наступили на платформу
     private int touchesCounter = 0;
     private int breakPoint = 3;
+    private bool skillactive = false;
+
+    private void Start() {
+        GameObject Player = GameObject.FindGameObjectWithTag("Player");
+        if (Player.GetComponent<Player>().stats.selectedSkills.IndexOf("Solid construction") != -1) {
+            breakPoint = 6;   
+            skillactive = true;
+        } 
+    }
 
     public void HandleTheTouch() {
         //Если соприкосновение было с игроком, то увеличиваем счётчик
         touchesCounter++;
         platfromAudioSource.Play();
-        SetNextSprite();
+        if(skillactive && ((touchesCounter % 2) == 0))
+            SetNextSprite();
+        if(!skillactive)
+            SetNextSprite();
     }
 
     private void Update() {
@@ -25,8 +37,11 @@ public class BreakThePlatform : MonoBehaviour
     }
 
     private void SetNextSprite() {
-        if (touchesCounter < breakPoint) {
-            gameObject.GetComponent<SpriteRenderer>().sprite = platformSprites[touchesCounter];
+        if (touchesCounter < breakPoint ) {
+            if(skillactive)
+                gameObject.GetComponent<SpriteRenderer>().sprite = platformSprites[touchesCounter/2];
+            else 
+                gameObject.GetComponent<SpriteRenderer>().sprite = platformSprites[touchesCounter];
         }
     }
 }

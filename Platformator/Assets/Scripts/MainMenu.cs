@@ -6,9 +6,10 @@ using System.IO;
 
 public class MainMenu : MonoBehaviour
 {
-    public Button NewGameButton;
-    public Button LoadButton;
-    public Button ExitButton;
+    [Header("CanvasButtons")]
+    [SerializeField] private Button NewGameButton;
+    [SerializeField] private Button LoadButton;
+    [SerializeField] private Button ExitButton;
 
     private int levelsToBoss = 5;
     private string pathPS = "Assets/Resources/PlayerStats.txt";

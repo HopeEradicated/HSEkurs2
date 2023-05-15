@@ -20,10 +20,11 @@ public class SkillManager : MonoBehaviour
 {
     public List<SkillArray> skillArr = new List<SkillArray>();
     public List<Skill> skillList = new List<Skill>();
+
     [Header("InteriaPrefab")]
-    public TextMeshProUGUI nameTextBox;
-    public TextMeshProUGUI descTextBox;
-    public TextMeshProUGUI countBox;
+    [SerializeField] private TextMeshProUGUI nameTextBox;
+    [SerializeField] private TextMeshProUGUI descTextBox;
+    [SerializeField] private TextMeshProUGUI countBox;
 
     private List<string> selectedSkill = new List<string>();
     private GameObject Player;
@@ -37,21 +38,7 @@ public class SkillManager : MonoBehaviour
         Player = GameObject.FindGameObjectWithTag("Player");
 
         string path = "Assets/Resources/Skills.txt";
-
-        /*
-        FileInfo fi = new FileInfo(path);
-            fi.Delete();
-        StreamWriter writer = new StreamWriter(path);
-        for(int i=0; i<skillList.Count; i++) {
-            SkillArray temp = new SkillArray();
-            temp.skillName = skillList[i].skillName;
-            temp.skillDescription = skillList[i].skillDescription;
-            //temp.skillSpecs = null;
-            writer.WriteLine(temp.SaveToString());
-        }
-        writer.Close();
-        */
-
+        
         StreamReader reader = new StreamReader(path); 
         while(!reader.EndOfStream) {
             SkillArray temp = new SkillArray();

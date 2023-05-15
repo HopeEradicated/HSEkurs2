@@ -3,14 +3,13 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private GameObject missileSample;
+    [SerializeField] private GameObject fireBallSample;
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private GameObject damageField;
     [SerializeField] private AudioSource weaponAudioSource;
     
-    public float missileSpeed = 10f;
-    private bool canAttack = true; 
-    private bool healed = false;
-    private int invuled = 0;
+    private float missileSpeed = 10f;
+    private bool canAttack = true, skillKD = true; 
     private GameObject Player;
 
     private void Start() {
@@ -18,18 +17,12 @@ public class PlayerAttack : MonoBehaviour
     }
 
     private void Update() {   
-        if (Input.GetKey(KeyCode.Q)){
-            /*
-            */
-        }
-        if (Input.GetKey(KeyCode.F) && !healed){
-            Player.GetComponent<Player>().ChangeHealthPoints(5);
-            healed = true;
-            Debug.Log("HEALED");
-        }
-        if (Input.GetKey(KeyCode.E)){
-            /*
-            */
+
+        if (Input.GetKey(KeyCode.Q) && skillKD){
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            FireBall(mousePos);
+            skillKD = false;
+            Invoke("KD", 10f);
         }
         if (Input.GetButton("Fire1") && canAttack) {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
@@ -45,6 +38,12 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+    private void FireBall(Vector2 mousePos) {
+            GameObject newMissile = Instantiate(fireBallSample, transform.position, Quaternion.identity);
+            Rigidbody2D missileRb = newMissile.GetComponent<Rigidbody2D>();
+            missileRb.velocity = mousePos.normalized * (missileSpeed * 0.75f); 
+    }
+
     private void Shoot(Vector2 mousePos) {
             GameObject newMissile = Instantiate(missileSample, transform.position, Quaternion.identity);
             Rigidbody2D missileRb = newMissile.GetComponent<Rigidbody2D>();
@@ -54,6 +53,10 @@ public class PlayerAttack : MonoBehaviour
     private void MeleeAttack() {
         playerAnimator.Play("Attack");
         weaponAudioSource.Play();   
+    }
+
+    private void KD() {
+        skillKD = true;
     }
 
     private void AttackDelay() {

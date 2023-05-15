@@ -36,7 +36,6 @@ public class SpawnObjects : MonoBehaviour
                 } else {
                     collectableRandBorder += 5;
                 }
-                //collectableSpawnPoints[index1].transform.SetParent(null); <- Возможно, это надо, потенциально удалить
             }
             Destroy(collectableSpawnPoints[index1]);
 
@@ -59,7 +58,6 @@ public class SpawnObjects : MonoBehaviour
                     }
                     enemyCounter++;
                 }
-                //enemySpawnPoints[index2].transform.SetParent(null); <- Возможно, это надо, потенциально удалить
             }
             Destroy(enemySpawnPoints[index2]);
             enemySpawnPoints.RemoveAt(index2);

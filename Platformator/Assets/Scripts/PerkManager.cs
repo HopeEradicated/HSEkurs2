@@ -10,9 +10,9 @@ using UnityEngine.UI;
 public class PerkManager : MonoBehaviour
 {    
     [Header("InteriaPrefab")]
-    public TextMeshProUGUI nameTextBox;
-    public TextMeshProUGUI countBox;
-    public Button buyButton;
+    [SerializeField] private TextMeshProUGUI nameTextBox;
+    [SerializeField] private TextMeshProUGUI countBox;
+    [SerializeField] private Button buyButton;
 
     private GameObject Player;
     private Perk tempPerk;

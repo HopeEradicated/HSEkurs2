@@ -19,9 +19,9 @@ public class RestartLevel : MonoBehaviour
             generatedLevel.SetActive(true);
             CreateLevelClone();
             playerObject.transform.position = Vector3.Lerp(playerObject.transform.position, new Vector3(0, 1f,0), 5f);
-            for (int i = 0; i < 3;i++) {
-                playerInfo.ChangeHealthPoints(1);
-            }
+            playerInfo.invuled = 0;
+            playerInfo.healed = false;
+            playerInfo.ChangeHealthPoints(6);
         }
     }
 

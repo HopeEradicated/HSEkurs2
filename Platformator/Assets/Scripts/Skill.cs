@@ -9,12 +9,9 @@ public class Skill : MonoBehaviour
     public string skillDescription;
     public bool selected = false;
     public bool applied = false;
-    private SpriteRenderer back, image;
-
-    private void Start() {
-        image = transform.Find("Image").GetComponent<SpriteRenderer>();
-        back = transform.Find("Back").GetComponent<SpriteRenderer>();
-    }
+    [Header("ItemPrefab")]
+    [SerializeField] private SpriteRenderer back;
+    [SerializeField] private SpriteRenderer image;
 
     private void Update() {
         Color c = image.color;

@@ -18,7 +18,7 @@ public class Portal : MonoBehaviour
         Debug.Log("Player has completed " + levelsCounter + " levels");
     }
     private void OnTriggerStay2D(Collider2D other) {
-        if (Input.GetKey(KeyCode.E) && other.gameObject.tag == "Player") {
+        if (other.gameObject.tag == "Player") {
             LoadNextLevel();
         }
     }

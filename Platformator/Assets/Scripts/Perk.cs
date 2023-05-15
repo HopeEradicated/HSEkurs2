@@ -18,15 +18,16 @@ public class Perk : MonoBehaviour
     public bool perkAvailable = false;
     public bool perkBlocked = false;
     [Header("InteriaPrefab")]
-    public TextMeshProUGUI nameTextBox;
-    public TextMeshProUGUI descTextBox;
-    public TextMeshProUGUI countBox;
-    public Image perkImage;
-    public Button perkButton;
-
+    [SerializeField] private TextMeshProUGUI nameTextBox;
+    [SerializeField] private TextMeshProUGUI descTextBox;
+    [SerializeField] private TextMeshProUGUI countBox;
+    [SerializeField] private Image perkImage;
+    [SerializeField] private Button perkButton;
+    [Header("ItemPrefab")]
+    [SerializeField] private SpriteRenderer back;
+    [SerializeField] private SpriteRenderer image;
 
     private GameObject Player;
-    private SpriteRenderer back, image;
 
     void Start()
     {
@@ -36,8 +37,6 @@ public class Perk : MonoBehaviour
             perkAvailable = false; 
         Player = GameObject.FindGameObjectWithTag("Player");
         perkButton.onClick.AddListener(PerkButtonOnClick); 
-        image = transform.Find("Image").GetComponent<SpriteRenderer>();
-        back = transform.Find("Back").GetComponent<SpriteRenderer>(); 
     }
 
     void Update() {
@@ -76,6 +75,6 @@ public class Perk : MonoBehaviour
         if(cost == 0) 
             countBox.text = "FREE";
         else
-            countBox.text = cost + " / " + Player.GetComponent<Player>().stats.money;
+            countBox.text = cost + "/" + Player.GetComponent<Player>().stats.money;
     }
 }
