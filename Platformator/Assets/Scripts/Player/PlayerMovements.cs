@@ -43,6 +43,12 @@ public class PlayerMovements : MonoBehaviour
                 }
             }
         }
+        if (!isOnWall) {
+            playerAnimator.SetFloat("velocityHorizontal", 0);
+            playerAnimator.SetFloat("velocityVertical", playerRb.velocity.y);
+        } else {
+            playerAnimator.SetFloat("velocityVertical", 0);
+        }
         hDirection = Input.GetAxisRaw("Horizontal") * plSpeed;
         if (hDirection != 0) {
 
@@ -54,7 +60,7 @@ public class PlayerMovements : MonoBehaviour
                 transform.rotation = Quaternion.Euler(0,180,0);
             }
         }
-        if (isGrounded) {
+        if (isGrounded && playerRb.velocity.y == 0) {
             playerAnimator.SetFloat("velocityHorizontal", Mathf.Abs(hDirection));
         } else {
             playerAnimator.SetFloat("velocityHorizontal", 0); 

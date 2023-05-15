@@ -33,6 +33,10 @@ public class Player : MonoBehaviour
 
     private string path = "Assets/Resources/PlayerStats.txt";
 
+    [Header("Sounds")]
+    [SerializeField] private AudioSource bodyAudioSource;
+    [SerializeField] private AudioClip hurtSound;
+
     void Awake() {
         DontDestroyOnLoad(transform.gameObject);
     }
@@ -73,6 +77,9 @@ public class Player : MonoBehaviour
             healthPoints += number;
             if (number < 0) {
                 VisualizeDamage();
+
+                bodyAudioSource.clip = hurtSound;
+                bodyAudioSource.Play();
 
                 isPlayerInvulnerable = true;
                 Invoke("MakePlayerVulnerable", 3f);
