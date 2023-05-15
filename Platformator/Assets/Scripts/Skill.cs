@@ -9,11 +9,10 @@ public class Skill : MonoBehaviour
     public string skillDescription;
     public bool selected = false;
     public bool applied = false;
-    private SpriteRenderer back;
-    private Image image;
+    private SpriteRenderer back, image;
 
     private void Start() {
-        image = transform.Find("Image").GetComponent<Image>();
+        image = transform.Find("Image").GetComponent<SpriteRenderer>();
         back = transform.Find("Back").GetComponent<SpriteRenderer>();
     }
 
