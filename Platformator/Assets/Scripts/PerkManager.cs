@@ -13,6 +13,7 @@ public class PerkManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI nameTextBox;
     [SerializeField] private TextMeshProUGUI countBox;
     [SerializeField] private Button buyButton;
+    [SerializeField] private Button exitButton;
 
     private GameObject Player;
     private Perk tempPerk;
@@ -28,21 +29,26 @@ public class PerkManager : MonoBehaviour
             if(Player.GetComponent<Player>().stats.selectedPerks.IndexOf(tempPerk.perkName) != -1) 
                 tempPerk.perkSelected = true;      
         } 
-        countBox.text = "5 / " + Player.GetComponent<Player>().stats.money;
+        countBox.text = "5/" + Player.GetComponent<Player>().stats.money;
         buyButton.onClick.AddListener(BuyButtonOnClick); 
+        exitButton.onClick.AddListener(ExitButtonOnClick); 
     }
 
-    private void Update()
+    private void ExitButtonOnClick()
     {
-        if (Input.GetKey(KeyCode.E)) {
-            foreach (GameObject perk in perks) {
-                tempPerk = perk.GetComponent<Perk>();
-                if(tempPerk.perkSelected) 
-                    selectedPerks.Add(tempPerk.perkName); 
-            } 
-            Player.GetComponent<Player>().UpdatePerks(selectedPerks);
+        foreach (GameObject perk in perks) {
+            tempPerk = perk.GetComponent<Perk>();
+            if(tempPerk.perkSelected) 
+                selectedPerks.Add(tempPerk.perkName); 
+        } 
+        Player.GetComponent<Player>().UpdatePerks(selectedPerks);
+        if(Player.GetComponent<Player>().stats.gainedLevel >= 0) {
             SceneManager.LoadScene("SkillSelect");
-        }            
+        }
+        else {
+            Player.GetComponent<Player>().UnloadVar();
+            SceneManager.LoadScene("Game");
+        }
     }
 
     private void BuyButtonOnClick()

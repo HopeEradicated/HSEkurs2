@@ -1,1 +1,0 @@
-{"level":9,"money":312,"expPoints":500,"expCurMax":1000,"gainedLevel":0,"selectedSkills":["Solid construction","Low gravity","Long arms"],"selectedPerks":["Damage Up I","Damage Up II","Damage Up III","Sling","Strange I","Strange II","Strange III","Heal","Normal mod","More gold","Hard mod","More XP"]}
