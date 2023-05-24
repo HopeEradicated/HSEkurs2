@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class BossInfo : MonoBehaviour
 {
@@ -36,6 +37,8 @@ public class BossInfo : MonoBehaviour
     }
 
     private void Die() {
+        EventBus.isPlayerWon = true;
         Destroy(gameObject);
+        SceneManager.LoadScene("EndOfTheGame");
     }
 }

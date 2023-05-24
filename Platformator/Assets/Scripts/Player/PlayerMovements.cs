@@ -44,12 +44,14 @@ public class PlayerMovements : MonoBehaviour
                 }
             }
         }
-        if (!isOnWall) {
+        playerAnimator.SetFloat("velocityVertical", playerRb.velocity.y);
+        playerAnimator.SetBool("isOnWall", isOnWall);
+        /*if (!isOnWall) {
             playerAnimator.SetFloat("velocityHorizontal", 0);
             playerAnimator.SetFloat("velocityVertical", playerRb.velocity.y);
         } else {
             playerAnimator.SetFloat("velocityVertical", 0);
-        }
+        }*/
         hDirection = Input.GetAxisRaw("Horizontal") * plSpeed;
         if (hDirection != 0) {
 
