@@ -486,6 +486,7 @@ MonoBehaviour:
   canJump: 0
   isGrounded: 0
   stepSound: {fileID: 0}
+  playerCol2D: {fileID: 0}
   playerSprite: {fileID: 2678030647418652386}
   playerAnimator: {fileID: 7930190528526847493}
   footAudioSource: {fileID: 2202897350906017775}
@@ -502,7 +503,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b53b61a153896c41a87f001f126e7e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invuled: 0
+  healed: 0
   healthPoints: 3
+  healthcap: 0
+  healthIcons: []
   bodyAudioSource: {fileID: 9106367509547472585}
   hurtSound: {fileID: 8300000, guid: 30db4b2b33abdb7409941618d388d376, type: 3}
 --- !u!114 &2734553294263545604
@@ -518,10 +523,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missileSample: {fileID: 3660513573783223384, guid: dcd4afcfec546154eae3eba609a92be1, type: 3}
+  fireBallSample: {fileID: 3660513573783223384, guid: 96e8c668605a6354e97084c792ca9144, type: 3}
   playerAnimator: {fileID: 7930190528526847493}
   damageField: {fileID: 3641585762227553613}
   weaponAudioSource: {fileID: 915124367541869838}
-  missileSpeed: 10
 --- !u!95 &7930190528526847493
 Animator:
   serializedVersion: 4

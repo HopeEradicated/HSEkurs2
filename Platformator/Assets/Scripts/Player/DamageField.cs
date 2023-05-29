@@ -5,7 +5,17 @@ public class DamageField : MonoBehaviour
     private float swordDmg = 2f;
 
     private void Start() {
+        Invoke("LongStart", 0.1f);
+    }
+
+    private void LongStart() {
         GameObject Player = GameObject.FindGameObjectWithTag("Player");
+        if (Player.GetComponent<Player>().stats.selectedSkills.IndexOf("Long arms") != -1) {
+            GetComponent<Transform>().transform.localScale = new Vector3(-1.5f,1.2f,0);
+        }
+        else {
+            GetComponent<Transform>().transform.localScale = new Vector3(-1f,1f,0);
+        }
         if (Player.GetComponent<Player>().stats.selectedPerks.IndexOf("Damage Up I") != -1) 
             swordDmg = 3f;    
         if (Player.GetComponent<Player>().stats.selectedPerks.IndexOf("Damage Up II") != -1)

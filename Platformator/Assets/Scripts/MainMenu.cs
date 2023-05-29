@@ -7,6 +7,7 @@ using System.IO;
 public class MainMenu : MonoBehaviour
 {
     [Header("CanvasButtons")]
+    [SerializeField] private Button TrainingButton;
     [SerializeField] private Button NewGameButton;
     [SerializeField] private Button LoadButton;
     [SerializeField] private Button ExitButton;
@@ -16,9 +17,14 @@ public class MainMenu : MonoBehaviour
     private string pathGS = "Assets/Resources/GameSP.txt";
 
     private void Start() {
-       NewGameButton.onClick.AddListener(StartNewGame);
-       LoadButton.onClick.AddListener(LoadGame);
-       ExitButton.onClick.AddListener(ExitGame); 
+        TrainingButton.onClick.AddListener(StartTraining);
+        NewGameButton.onClick.AddListener(StartNewGame);
+        LoadButton.onClick.AddListener(LoadGame);
+        ExitButton.onClick.AddListener(ExitGame); 
+    }
+
+    private void StartTraining() {
+        SceneManager.LoadScene("Training");
     }
 
     private void StartNewGame() {

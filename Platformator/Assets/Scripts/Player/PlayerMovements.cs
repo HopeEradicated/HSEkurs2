@@ -30,6 +30,16 @@ public class PlayerMovements : MonoBehaviour
         playerCoords = GetComponent<Transform>();
         playerRb = GetComponent<Rigidbody2D>();
         playerCol2D = GetComponent<BoxCollider2D>();
+        Invoke("LongStart", 0.1f);
+    }
+
+    private void LongStart() {
+        GameObject Player = GameObject.FindGameObjectWithTag("Player");
+        if (Player.GetComponent<Player>().stats.selectedSkills.IndexOf("Low gravity") != -1)
+            vForce = 580f;
+        if (Player.GetComponent<Player>().stats.selectedSkills.IndexOf("Slide") != -1) {
+            plSpeed = 7.5f;
+        }
     }
 
     private void Update() {
@@ -103,7 +113,7 @@ public class PlayerMovements : MonoBehaviour
         if (other.gameObject.tag == "Wall"){
             canJump = true;
             isOnWall = true;
-        } else if (Input.GetKey(KeyCode.S)) {
+        } else if (Input.GetKeyDown(KeyCode.S)) {
             //Реализовываем механику спрыгивания с платформы
             playerCol2D.isTrigger = true;
         }

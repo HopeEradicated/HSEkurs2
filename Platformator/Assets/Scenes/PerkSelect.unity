@@ -586,7 +586,7 @@ MonoBehaviour:
   nameTextBox: {fileID: 1040323866}
   countBox: {fileID: 418010780}
   buyButton: {fileID: 590058720}
-  exitButton: {fileID: 0}
+  exitButton: {fileID: 1849075130}
 --- !u!1 &215804461
 GameObject:
   m_ObjectHideFlags: 0

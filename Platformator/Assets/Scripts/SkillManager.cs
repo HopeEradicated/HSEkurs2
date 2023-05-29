@@ -69,7 +69,7 @@ public class SkillManager : MonoBehaviour
 
     private void Update()
     {
-        //countBox.text = curSelected + " / " + Player.GetComponent<Player>().stats.gainedLevel;      
+        countBox.text = curSelected + " / " + Player.GetComponent<Player>().stats.gainedLevel;      
         if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) {
             skillList[curPosition].SelectedUpdate();
             skillList[(curPosition+1)%skillList.Count].SelectedUpdate();
@@ -86,7 +86,7 @@ public class SkillManager : MonoBehaviour
         }         
     }
 
-    private void ExitButtonOnClick()
+    private void BuyButtonOnClick()
     {
         if ((skillList[curPosition].applied && Player.GetComponent<Player>().stats.gainedLevel == curSelected)) {
             curSelected -= 1;
@@ -101,7 +101,7 @@ public class SkillManager : MonoBehaviour
         }   
     }
 
-    private void BuyButtonOnClick()
+    private void ExitButtonOnClick()
     {
         Player.GetComponent<Player>().stats.gainedLevel -= curSelected;
         for(int i=0; i<skillList.Count; i++)

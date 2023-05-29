@@ -36,6 +36,7 @@ public class Player : MonoBehaviour
 
     [Header("Sounds")]
     [SerializeField] private AudioSource bodyAudioSource;
+    [SerializeField] private AudioClip lvlupSound;
     [SerializeField] private AudioClip hurtSound;
 
     void Awake() {
@@ -52,23 +53,23 @@ public class Player : MonoBehaviour
             healthPoints = 5;
         if (stats.selectedPerks.IndexOf("Strange III") != -1) 
             healthPoints = 6;  
-        ChangeHealthPoints(6);
-        for(int i=0; i<6; i++) {
-            healthcap++;
+        for(int i=0; i<6; i++) {  
             if(i>=healthPoints)
                 healthIcons[i].SetActive(false);
+            else 
+                healthcap++;    
         }
     }
     
     private void Update() {   
-        if (Input.GetKeyDown(KeyCode.E) && invuled < 3){
+        if (Input.GetKeyDown(KeyCode.E) && invuled < 3 && stats.selectedPerks.IndexOf("Inviolability") != -1){
             invulnerableSkill = true;
             VisualizeInvinc();
             Invoke("InvulnerableSkill", 15f);
             invuled++;
             Debug.Log("invuled");
         }
-        if (Input.GetKeyDown(KeyCode.F) && !healed){
+        if (Input.GetKeyDown(KeyCode.F) && !healed && stats.selectedPerks.IndexOf("Heal") != -1){
             ChangeHealthPoints(6);
             healed = true; 
             Debug.Log("healed");
@@ -181,6 +182,8 @@ public class Player : MonoBehaviour
 
     public void levelUp() {
         if (stats.expPoints >= stats.expCurMax) {
+            bodyAudioSource.clip = lvlupSound;
+            bodyAudioSource.Play();
             stats.level += 1;
             stats.gainedLevel += 1;
             stats.expCurMax = 100 + 100 * stats.level;

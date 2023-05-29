@@ -4,6 +4,7 @@ using System.IO;
 
 public class Portal : MonoBehaviour
 {
+    [SerializeField] private bool toMenu;
     private static int levelsCounter;
     private int levelsToBoss = 5;
     private string path = "Assets/Resources/GameSP.txt";
@@ -19,7 +20,13 @@ public class Portal : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D other) {
         if (other.gameObject.tag == "Player") {
-            LoadNextLevel();
+            if (toMenu) {
+                GameObject Player = GameObject.FindGameObjectWithTag("Player");
+                Destroy(Player);
+                SceneManager.LoadScene("MainMenu");
+            }
+            else
+                LoadNextLevel();
         }
     }
     

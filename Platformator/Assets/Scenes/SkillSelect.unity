@@ -928,7 +928,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5419668145580830047, guid: 40361f909e9840d40b5571a208af15a3, type: 3}
       propertyPath: skillName
-      value: Zom
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -5419668145580830047, guid: 40361f909e9840d40b5571a208af15a3, type: 3}
+      propertyPath: skillDescription
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1642128136415104979, guid: 40361f909e9840d40b5571a208af15a3, type: 3}
       propertyPath: m_Pivot.x
@@ -1017,10 +1021,6 @@ PrefabInstance:
     - target: {fileID: 1642128136415104989, guid: 40361f909e9840d40b5571a208af15a3, type: 3}
       propertyPath: m_Name
       value: Skill
-      objectReference: {fileID: 0}
-    - target: {fileID: 3285712514523030938, guid: 40361f909e9840d40b5571a208af15a3, type: 3}
-      propertyPath: m_SortingOrder
-      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -1553,11 +1553,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5419668145580830047, guid: 40361f909e9840d40b5571a208af15a3, type: 3}
       propertyPath: skillName
-      value: Ref
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -5419668145580830047, guid: 40361f909e9840d40b5571a208af15a3, type: 3}
       propertyPath: skillDescription
-      value: Skill 2
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1642128136415104979, guid: 40361f909e9840d40b5571a208af15a3, type: 3}
       propertyPath: m_Pivot.x
@@ -1770,11 +1770,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5419668145580830047, guid: 40361f909e9840d40b5571a208af15a3, type: 3}
       propertyPath: skillName
-      value: Zim
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -5419668145580830047, guid: 40361f909e9840d40b5571a208af15a3, type: 3}
       propertyPath: skillDescription
-      value: Skill 3
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1642128136415104979, guid: 40361f909e9840d40b5571a208af15a3, type: 3}
       propertyPath: m_Pivot.x

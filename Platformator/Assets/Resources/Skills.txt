@@ -1,6 +1,6 @@
 {"skillName":"Solid construction","skillDescription":"Увеличивает прочности ломаемой платформы в 2 раза"}
 {"skillName":"Low gravity","skillDescription":"Увеличивает максимальную высоту прыжка"}
-{"skillName":"Flutter","skillDescription":"Уменьшает высоту прыжка, но позволяет прыгать бесконечно"}
+{"skillName":"Slide","skillDescription":"Увеличивает горизонтальную скорость персонажа"}
 {"skillName":"Long arms","skillDescription":"Увеличивет дальность атаки мечем"}
 {"skillName":"Bigger is better","skillDescription":"Увеличивет размер снарядов, но уменьшает их скорость"}
 {"skillName":"Smaller is better","skillDescription":"Уменьшает размер снарядов, но увеличивает их скорость"}
