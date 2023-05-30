@@ -256,7 +256,11 @@ PrefabInstance:
     - target: {fileID: 2155588571160324300, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 1e1460be89cbdad46bf8f35bf0bd98d2, type: 3}
+      objectReference: {fileID: 21300000, guid: 4dac6bd1c22138845bfe6f940e92eaf1, type: 3}
+    - target: {fileID: 2155588571160324300, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7343720063951586050, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
       propertyPath: m_Name
       value: Perk (2)
@@ -1332,10 +1336,14 @@ PrefabInstance:
     - target: {fileID: 2155588571160324300, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: c0338db7f0ae19045ba2adcbbcf317c5, type: 3}
+      objectReference: {fileID: 21300000, guid: 6bc3ba9627e708642b9a21e0375ebe88, type: 3}
     - target: {fileID: 2155588571160324300, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
       propertyPath: m_SortingOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155588571160324300, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7343720063951586050, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
       propertyPath: m_Name
@@ -1499,7 +1507,11 @@ PrefabInstance:
     - target: {fileID: 2155588571160324300, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 4bdd56e47ff356449bbaa27613ddebcf, type: 3}
+      objectReference: {fileID: 21300000, guid: a18bb541df54a924d997dbe9f04d5646, type: 3}
+    - target: {fileID: 2155588571160324300, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7343720063951586050, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
       propertyPath: m_Name
       value: Perk (12)
@@ -2671,7 +2683,11 @@ PrefabInstance:
     - target: {fileID: 2155588571160324300, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 66a948b1aee52954f81cd94f4600c140, type: 3}
+      objectReference: {fileID: 21300000, guid: 182bedaa16d67f941b1d2d03157e37f9, type: 3}
+    - target: {fileID: 2155588571160324300, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7343720063951586050, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
       propertyPath: m_Name
       value: Perk (8)
@@ -3076,7 +3092,11 @@ PrefabInstance:
     - target: {fileID: 2155588571160324300, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 15133853ba9407b47b10d8f6262e6994, type: 3}
+      objectReference: {fileID: 21300000, guid: 956ce58666d9f9a4891fa005e0245ad7, type: 3}
+    - target: {fileID: 2155588571160324300, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7343720063951586050, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
       propertyPath: m_Name
       value: Perk (6)
@@ -3516,7 +3536,11 @@ PrefabInstance:
     - target: {fileID: 2155588571160324300, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: da773d700506ec348aec7dfdfbb59961, type: 3}
+      objectReference: {fileID: 21300000, guid: 62bb8afbbff358442ad51816cce25e6e, type: 3}
+    - target: {fileID: 2155588571160324300, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7343720063951586050, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
       propertyPath: m_Name
       value: Perk (3)
@@ -3685,7 +3709,11 @@ PrefabInstance:
     - target: {fileID: 2155588571160324300, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 9291cda035ee1bc4eb888d99a482900f, type: 3}
+      objectReference: {fileID: 21300000, guid: 18bb3b80288c6ef4fb521eb56c783399, type: 3}
+    - target: {fileID: 2155588571160324300, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7343720063951586050, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
       propertyPath: m_Name
       value: Perk (7)
@@ -4621,9 +4649,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 19c652e297b866b46baa907122d62ec1, type: 3}
     - target: {fileID: 2155588571160324300, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
+      propertyPath: m_Size.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155588571160324300, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
+      propertyPath: m_Size.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155588571160324300, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 19c652e297b866b46baa907122d62ec1, type: 3}
+    - target: {fileID: 2155588571160324300, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7343720063951586050, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
       propertyPath: m_Name
       value: Perk (10)
@@ -5285,7 +5325,11 @@ PrefabInstance:
     - target: {fileID: 2155588571160324300, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 59a1bad2ecc90d840a8d842ff5f37de5, type: 3}
+      objectReference: {fileID: 21300000, guid: b7dc2b0397e1fda459ad7f3eb357cc29, type: 3}
+    - target: {fileID: 2155588571160324300, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7343720063951586050, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
       propertyPath: m_Name
       value: Perk (4)
@@ -5710,7 +5754,11 @@ PrefabInstance:
     - target: {fileID: 2155588571160324300, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 8c8c1b06e2f5257428bba5a4c5541202, type: 3}
+      objectReference: {fileID: 21300000, guid: 06908f9a13618ee42889919f9b95aea5, type: 3}
+    - target: {fileID: 2155588571160324300, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7343720063951586050, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
       propertyPath: m_Name
       value: Perk (9)
@@ -6004,7 +6052,11 @@ PrefabInstance:
     - target: {fileID: 2155588571160324300, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: ed6b039a8ed6d2249853e68564796323, type: 3}
+      objectReference: {fileID: 21300000, guid: bbaff70ac6cd2f04baf604b2c4af247c, type: 3}
+    - target: {fileID: 2155588571160324300, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7343720063951586050, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
       propertyPath: m_Name
       value: Perk (14)
@@ -6162,7 +6214,11 @@ PrefabInstance:
     - target: {fileID: 2155588571160324300, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: d1061190a667b3246b6519fcd7e640f5, type: 3}
+      objectReference: {fileID: 21300000, guid: e50e430dcf7cafb468646fbb7d302497, type: 3}
+    - target: {fileID: 2155588571160324300, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7343720063951586050, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
       propertyPath: m_Name
       value: Perk (5)
@@ -6545,7 +6601,11 @@ PrefabInstance:
     - target: {fileID: 2155588571160324300, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: a145bcb3b32db4749acfb8ebc5f582c5, type: 3}
+      objectReference: {fileID: 21300000, guid: a688eee4d5166cc4395d221c1839c1d6, type: 3}
+    - target: {fileID: 2155588571160324300, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7343720063951586050, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
       propertyPath: m_Name
       value: Perk (13)
@@ -6641,6 +6701,10 @@ PrefabInstance:
     - target: {fileID: 7343720063951586051, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9014854788592657022, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
+      propertyPath: m_Sprite
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -6958,7 +7022,11 @@ PrefabInstance:
     - target: {fileID: 2155588571160324300, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 25b4545a1d7a623499c7821edc5d5d1f, type: 3}
+      objectReference: {fileID: 21300000, guid: 45d19bffee3f2484c8d81a86c20a98fc, type: 3}
+    - target: {fileID: 2155588571160324300, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7343720063951586050, guid: fd28d5e69428f194b8acd546bb2ea252, type: 3}
       propertyPath: m_Name
       value: Perk (11)

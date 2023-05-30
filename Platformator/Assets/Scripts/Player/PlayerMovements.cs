@@ -43,6 +43,7 @@ public class PlayerMovements : MonoBehaviour
     }
 
     private void Update() {
+      
         if (canJump){
             if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space)) && !Input.GetKey(KeyCode.S)){
                 playerRb.velocity = new Vector2(playerRb.velocity.x, 0);
@@ -56,12 +57,7 @@ public class PlayerMovements : MonoBehaviour
         }
         playerAnimator.SetFloat("velocityVertical", playerRb.velocity.y);
         playerAnimator.SetBool("isOnWall", isOnWall);
-        /*if (!isOnWall) {
-            playerAnimator.SetFloat("velocityHorizontal", 0);
-            playerAnimator.SetFloat("velocityVertical", playerRb.velocity.y);
-        } else {
-            playerAnimator.SetFloat("velocityVertical", 0);
-        }*/
+        
         hDirection = Input.GetAxisRaw("Horizontal") * plSpeed;
         if (hDirection != 0) {
 
@@ -85,6 +81,11 @@ public class PlayerMovements : MonoBehaviour
 
         bool isSomeBlockingObjectOnTheLeft = (raycastLeft.collider != null && (raycastLeft.collider.gameObject.tag == "Wall" || raycastLeft.collider.gameObject.tag == "Border"));
         bool isSomeBlockingObjectOnTheRight = (raycastRight.collider != null && (raycastRight.collider.gameObject.tag == "Wall" || raycastRight.collider.gameObject.tag == "Border"));
+        if ((isSomeBlockingObjectOnTheLeft && raycastLeft.collider.gameObject.tag == "Wall") || (isSomeBlockingObjectOnTheRight && raycastRight.collider.gameObject.tag == "Wall")) {
+            isOnWall = true;
+        } else {
+            isOnWall = false;    
+        }
         if ((isSomeBlockingObjectOnTheRight && hDirection < 0 ) || (isSomeBlockingObjectOnTheLeft && hDirection > 0) || (!isSomeBlockingObjectOnTheLeft && !isSomeBlockingObjectOnTheRight)) {
             playerRb.velocity = new Vector2(hDirection, playerRb.velocity.y);
         }
@@ -114,16 +115,9 @@ public class PlayerMovements : MonoBehaviour
     private void OnCollisionStay2D(Collision2D other) {
         if (other.gameObject.tag == "Wall"){
             canJump = true;
-            isOnWall = true;
         } else if (Input.GetKeyDown(KeyCode.S)) {
             //Реализовываем механику спрыгивания с платформы
             playerCol2D.isTrigger = true;
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D other) {
-        if (other.gameObject.tag == "Wall"){
-            isOnWall = false;
         }
     }
 

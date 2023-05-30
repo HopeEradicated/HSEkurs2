@@ -486,7 +486,7 @@ MonoBehaviour:
   canJump: 0
   isGrounded: 0
   stepSound: {fileID: 0}
-  playerCol2D: {fileID: 0}
+  playerCol2D: {fileID: 2678030647418652385}
   playerSprite: {fileID: 2678030647418652386}
   playerAnimator: {fileID: 7930190528526847493}
   footAudioSource: {fileID: 2202897350906017775}
@@ -509,6 +509,7 @@ MonoBehaviour:
   healthcap: 0
   healthIcons: []
   bodyAudioSource: {fileID: 9106367509547472585}
+  lvlupSound: {fileID: 8300000, guid: 94888cd250b098441966b54455670f11, type: 3}
   hurtSound: {fileID: 8300000, guid: 30db4b2b33abdb7409941618d388d376, type: 3}
 --- !u!114 &2734553294263545604
 MonoBehaviour:
@@ -523,14 +524,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missileSample: {fileID: 3660513573783223384, guid: dcd4afcfec546154eae3eba609a92be1, type: 3}
-<<<<<<< Updated upstream
-  fireBallSample: {fileID: 3660513573783223384, guid: 96e8c668605a6354e97084c792ca9144, type: 3}
-=======
-  fireBallSample: {fileID: 0}
->>>>>>> Stashed changes
+  fireBallSample: {fileID: 3660513573783223384, guid: fbc52bc35fa129a41ae6dd5dbe3be38e, type: 3}
   playerAnimator: {fileID: 7930190528526847493}
   damageField: {fileID: 3641585762227553613}
   weaponAudioSource: {fileID: 915124367541869838}
+  meleeAttackSound: {fileID: 8300000, guid: 211373fa875f5f64fbf8704e2d4e149a, type: 3}
+  rangeAttackSound: {fileID: 8300000, guid: 6e846c313f49bd348abd25795f093595, type: 3}
+  fireBallAttackSound: {fileID: 8300000, guid: 7601449d72c230747bf539f4b7a1da5e, type: 3}
 --- !u!95 &7930190528526847493
 Animator:
   serializedVersion: 4

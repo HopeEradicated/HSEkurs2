@@ -6,7 +6,12 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private GameObject fireBallSample;
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private GameObject damageField;
+
+    [Header("AudioResources")]
     [SerializeField] private AudioSource weaponAudioSource;
+    [SerializeField] private AudioClip meleeAttackSound;
+    [SerializeField] private AudioClip rangeAttackSound;
+    [SerializeField] private AudioClip fireBallAttackSound;
     
     private float missileSpeed = 10f;
     private bool canAttack = true, skillKD = true, fireballAquered = false; 
@@ -37,17 +42,9 @@ public class PlayerAttack : MonoBehaviour
     }
 
     private void Update() {   
-
-<<<<<<< Updated upstream
         if (Input.GetKey(KeyCode.Q) && skillKD && fireballAquered){
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-            FireBall(mousePos);
-            skillKD = false;
-=======
-        if (Input.GetKey(KeyCode.Q) && skillKD){
             rangeAttackTargetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-            playerAnimator.Play("Fireball");
->>>>>>> Stashed changes
+            FireBallAttack();
             Invoke("KD", 10f);
         }
         if (Input.GetButton("Fire1") && canAttack) {
@@ -57,7 +54,7 @@ public class PlayerAttack : MonoBehaviour
         }
         if (Input.GetButton("Fire2") && canAttack) {
             rangeAttackTargetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-            playerAnimator.Play("RangeAttack");
+            RangeAttack();
             Invoke("AttackDelay", 1f);
         }
     }
@@ -66,6 +63,8 @@ public class PlayerAttack : MonoBehaviour
             GameObject newMissile = Instantiate(fireBallSample, transform.position, Quaternion.identity);
             Rigidbody2D missileRb = newMissile.GetComponent<Rigidbody2D>();
             missileRb.velocity = rangeAttackTargetPos.normalized * (missileSpeed * 0.75f);
+            weaponAudioSource.clip = fireBallAttackSound;
+            weaponAudioSource.Play();   
             skillKD = false; 
     }
 
@@ -73,12 +72,23 @@ public class PlayerAttack : MonoBehaviour
             GameObject newMissile = Instantiate(missileSample, transform.position, Quaternion.identity);
             Rigidbody2D missileRb = newMissile.GetComponent<Rigidbody2D>();
             missileRb.velocity = rangeAttackTargetPos.normalized * missileSpeed;
+            weaponAudioSource.clip = rangeAttackSound;
+            weaponAudioSource.Play();   
             canAttack = false;
+    }
+
+    private void FireBallAttack() {
+        playerAnimator.Play("Fireball");
     }
 
     private void MeleeAttack() {
         playerAnimator.Play("Attack");
+        weaponAudioSource.clip = meleeAttackSound;
         weaponAudioSource.Play();   
+    }
+
+    private void RangeAttack() {
+        playerAnimator.Play("RangeAttack");
     }
 
     private void KD() {
