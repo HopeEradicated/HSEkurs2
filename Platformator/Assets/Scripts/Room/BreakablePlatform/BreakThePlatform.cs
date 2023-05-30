@@ -8,7 +8,7 @@ public class BreakThePlatform : MonoBehaviour
     [SerializeField] private AudioSource platfromAudioSource;
     //Заводим счётчик, который будет хранить, сколько раз мы наступили на платформу
     private int touchesCounter = 0;
-    private int breakPoint = 3;
+    private int breakPoint = 4;
     private bool skillactive = false;
 
     private void Start() {

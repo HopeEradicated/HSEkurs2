@@ -22,8 +22,8 @@ public class Shooter : MonoBehaviour
 
     private IEnumerator Shooting() {
         while (canAttack) {
-            yield return new WaitForSeconds(waitTime);
             shooterAnimator.Play("ArcherAttack");
+            yield return new WaitForSeconds(waitTime);
         }
         StopCoroutine(attackCoroutine);
     }

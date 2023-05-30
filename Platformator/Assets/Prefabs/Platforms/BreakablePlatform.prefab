@@ -105,6 +105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   platformSprites:
   - {fileID: 2033468623, guid: 3ef73572487c3d24b802bf49ff2f633c, type: 3}
+  - {fileID: -716517939, guid: 33384420c2dc1e64a85146d17bf99ce2, type: 3}
   - {fileID: 1205700493, guid: f8eaf33d70771684da8f9243ff7b6e81, type: 3}
   - {fileID: 1802711044, guid: 5428a5ba79649ce45b4b3ebf5693da5f, type: 3}
   platfromAudioSource: {fileID: 2126323980995650893}

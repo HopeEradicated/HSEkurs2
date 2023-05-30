@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private float lifeTime = 3f;
+    private float lifeTime = 5f;
     private float horSpeed = 5f;
     private bool parentFlipedX;
     private int direction = 0;

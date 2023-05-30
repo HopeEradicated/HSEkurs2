@@ -523,7 +523,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missileSample: {fileID: 3660513573783223384, guid: dcd4afcfec546154eae3eba609a92be1, type: 3}
+<<<<<<< Updated upstream
   fireBallSample: {fileID: 3660513573783223384, guid: 96e8c668605a6354e97084c792ca9144, type: 3}
+=======
+  fireBallSample: {fileID: 0}
+>>>>>>> Stashed changes
   playerAnimator: {fileID: 7930190528526847493}
   damageField: {fileID: 3641585762227553613}
   weaponAudioSource: {fileID: 915124367541869838}

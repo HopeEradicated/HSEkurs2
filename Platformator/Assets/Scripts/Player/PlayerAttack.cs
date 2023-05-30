@@ -11,7 +11,7 @@ public class PlayerAttack : MonoBehaviour
     private float missileSpeed = 10f;
     private bool canAttack = true, skillKD = true, fireballAquered = false; 
     private GameObject Player;
-
+    private Vector2 rangeAttackTargetPos;
     private void Start() {
         Invoke("LongStart", 0.1f);
     }
@@ -38,36 +38,42 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update() {   
 
+<<<<<<< Updated upstream
         if (Input.GetKey(KeyCode.Q) && skillKD && fireballAquered){
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
             FireBall(mousePos);
             skillKD = false;
+=======
+        if (Input.GetKey(KeyCode.Q) && skillKD){
+            rangeAttackTargetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            playerAnimator.Play("Fireball");
+>>>>>>> Stashed changes
             Invoke("KD", 10f);
         }
         if (Input.GetButton("Fire1") && canAttack) {
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
             MeleeAttack();
             canAttack = false;
             Invoke("AttackDelay", 1f);
         }
         if (Input.GetButton("Fire2") && canAttack) {
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-            Shoot(mousePos);
-            canAttack = false;
+            rangeAttackTargetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            playerAnimator.Play("RangeAttack");
             Invoke("AttackDelay", 1f);
         }
     }
 
-    private void FireBall(Vector2 mousePos) {
+    private void FireBall() {
             GameObject newMissile = Instantiate(fireBallSample, transform.position, Quaternion.identity);
             Rigidbody2D missileRb = newMissile.GetComponent<Rigidbody2D>();
-            missileRb.velocity = mousePos.normalized * (missileSpeed * 0.75f); 
+            missileRb.velocity = rangeAttackTargetPos.normalized * (missileSpeed * 0.75f);
+            skillKD = false; 
     }
 
-    private void Shoot(Vector2 mousePos) {
+    private void Shoot() {
             GameObject newMissile = Instantiate(missileSample, transform.position, Quaternion.identity);
             Rigidbody2D missileRb = newMissile.GetComponent<Rigidbody2D>();
-            missileRb.velocity = mousePos.normalized * missileSpeed; 
+            missileRb.velocity = rangeAttackTargetPos.normalized * missileSpeed;
+            canAttack = false;
     }
 
     private void MeleeAttack() {
