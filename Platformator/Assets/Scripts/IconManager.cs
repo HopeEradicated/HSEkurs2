@@ -14,14 +14,17 @@ public class IconManager : MonoBehaviour
     [SerializeField] private GameObject invul;
     [SerializeField] private GameObject heal;
 
-    private void Start()
-    {
+    private void Start() {
+        Invoke("LongStart", 0.1f);
+    }
+    
+    private void LongStart() {
         GameObject Player = GameObject.FindGameObjectWithTag("Player");
-        if (Player.GetComponent<Player>().stats.selectedPerks.IndexOf("Fireball") != -1) 
-            fireBall.SetActive(true);
-        if (Player.GetComponent<Player>().stats.selectedPerks.IndexOf("Inviolability") != -1) 
-            invul.SetActive(true);
-        if (Player.GetComponent<Player>().stats.selectedPerks.IndexOf("Heal") != -1) 
-            heal.SetActive(true);
+        if (Player.GetComponent<Player>().stats.selectedPerks.IndexOf("Fireball") == -1) 
+            fireBall.SetActive(false);
+        if (Player.GetComponent<Player>().stats.selectedPerks.IndexOf("Inviolability") == -1) 
+            invul.SetActive(false);
+        if (Player.GetComponent<Player>().stats.selectedPerks.IndexOf("Heal") == -1) 
+            heal.SetActive(false);
     }
 }

@@ -28,16 +28,16 @@ public class PlayerAttack : MonoBehaviour
         if (Player.GetComponent<Player>().stats.selectedSkills.IndexOf("Bigger is better") != -1 && Player.GetComponent<Player>().stats.selectedSkills.IndexOf("Smaller is better") == -1) {
             missileSpeed = 6f; 
             missileSample.transform.localScale = new Vector3(7f,7f,0);
-            fireBallSample.transform.localScale = new Vector3(0.9f,0.9f,0);
+            fireBallSample.transform.localScale = new Vector3(11f,11f,0);
         }
         else if (Player.GetComponent<Player>().stats.selectedSkills.IndexOf("Smaller is better") != -1 && Player.GetComponent<Player>().stats.selectedSkills.IndexOf("Bigger is better") == -1) {
             missileSpeed = 14f; 
             missileSample.transform.localScale = new Vector3(3f,3f,0);
-            fireBallSample.transform.localScale = new Vector3(0.6f,0.6f,0);
+            fireBallSample.transform.localScale = new Vector3(9f,9f,0);
         }
         else {
             missileSample.transform.localScale = new Vector3(5f,5f,0);
-            fireBallSample.transform.localScale = new Vector3(0.75f,0.75f,0);
+            fireBallSample.transform.localScale = new Vector3(7f,7f,0);
         }
     }
 
@@ -49,7 +49,6 @@ public class PlayerAttack : MonoBehaviour
         }
         if (Input.GetButton("Fire1") && canAttack) {
             MeleeAttack();
-            canAttack = false;
             Invoke("AttackDelay", 1f);
         }
         if (Input.GetButton("Fire2") && canAttack) {
@@ -84,7 +83,8 @@ public class PlayerAttack : MonoBehaviour
     private void MeleeAttack() {
         playerAnimator.Play("Attack");
         weaponAudioSource.clip = meleeAttackSound;
-        weaponAudioSource.Play();   
+        weaponAudioSource.Play();
+        canAttack = false;  
     }
 
     private void RangeAttack() {

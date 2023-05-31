@@ -7,6 +7,7 @@ public class BossAttacks : MonoBehaviour
     [SerializeField] private GameObject missileSample;
     [SerializeField] private BossInfo bossInfo;
     [SerializeField] private Animator bossAnimator;
+    [SerializeField] private GameObject warningObj;
     [Header("Sounds")]
     [SerializeField] private AudioSource bossAudioSource;
     [SerializeField] private AudioSource attackAudioSource;
@@ -24,13 +25,17 @@ public class BossAttacks : MonoBehaviour
     private int attackIndex = 0;
     private bool isBossHealthLessThanAHalf;
 
+    private GameObject playerObj;
+
     private void Start() {
         attackCoroutine = StartCoroutine("PlayAttackAnimation");
         healthStep = bossInfo.GetBossPrimaryHealth() / 2;
+        playerObj = GameObject.FindGameObjectWithTag("Player");
         //CallAttackNTimes("SideAttack", 10, 1.5f);
     }
 
     private void Update() {
+        warningObj.transform.position = new Vector2(playerObj.transform.position.x + 11f, warningObj.transform.position.y);
         if (bossInfo.GetBossHealth() < bossInfo.GetBossPrimaryHealth() - healthStep && !isBossHealthLessThanAHalf) {
             bossAudioSource.clip = rageSound;
             bossAudioSource.Play();
@@ -54,7 +59,7 @@ public class BossAttacks : MonoBehaviour
     }
  
     private void SimpleAttack() {
-        Vector2 playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
+        Vector2 playerPos = playerObj.transform.position;
 
         GameObject newMissile = Instantiate(missileSample, transform.position, Quaternion.identity);
         Rigidbody2D missileRb = newMissile.GetComponent<Rigidbody2D>();
@@ -63,7 +68,7 @@ public class BossAttacks : MonoBehaviour
     }
 
     private void TrippleAttack() {
-        Vector2 playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
+        Vector2 playerPos = playerObj.transform.position;
 
         GameObject firstMissile = Instantiate(missileSample, transform.position, Quaternion.identity);
         GameObject secondMissile = Instantiate(missileSample, transform.position, Quaternion.identity);
@@ -79,19 +84,25 @@ public class BossAttacks : MonoBehaviour
     }
 
     private void SideAttack() {
-        float speedMod = 5f;
-        Vector2 playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
+        float speedMod = 4f;
+        Vector2 playerPos = playerObj.transform.position;
         GameObject newMissile = Instantiate(missileSample, new Vector2(transform.position.x + 25f, playerPos.y), Quaternion.identity);
-
+        warningObj.transform.position = new Vector2(playerPos.x + 11f, playerPos.y);
+        warningObj.SetActive(true);
+        Invoke("HideWarningObj", 1f);
         Rigidbody2D newMissileRb = newMissile.GetComponent<Rigidbody2D>();
         newMissileRb.velocity = Vector2.left.normalized * missileSpeed*speedMod;
+    }
+
+    private void HideWarningObj() {
+        warningObj.SetActive(false);    
     }
 
     private void GutlingGun() {
         float randModifier = Random.Range(-6, 6);
         float speedMod = 3f;
 
-        Vector2 playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
+        Vector2 playerPos = playerObj.transform.position;
 
         GameObject newMissile = Instantiate(missileSample, transform.position, Quaternion.identity);
 

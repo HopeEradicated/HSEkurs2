@@ -6,8 +6,8 @@ public class Portal : MonoBehaviour
 {
     [SerializeField] private bool toMenu;
     private static int levelsCounter;
-    private int levelsToBoss = 5;
-    private string path = "Assets/Resources/GameSP.txt";
+    private int levelsToBoss = 3;
+    private string path = Application.dataPath + "/Resources/GameSP.txt";
 
     [SerializeField] private AudioSource portalAudioSource;
 
@@ -25,8 +25,10 @@ public class Portal : MonoBehaviour
                 Destroy(Player);
                 SceneManager.LoadScene("MainMenu");
             }
-            else
+            else {
+                EventBus.isLevelGenerated = false;
                 LoadNextLevel();
+            }
         }
     }
     

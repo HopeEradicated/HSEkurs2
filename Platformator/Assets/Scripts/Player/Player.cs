@@ -23,7 +23,7 @@ public class PlayerStats
 
 public class Player : MonoBehaviour
 {
-    private string path = "Assets/Resources/PlayerStats.txt";
+    private string path = Application.dataPath + "/Resources/PlayerStats.txt";
 
     public int invuled = 0;
     public bool healed = false;
@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
     private void Start() {
         if (File.Exists(path))
             LoadVar();
-        healthIcons = GameObject.FindGameObjectsWithTag("Health");
+        //healthIcons = GameObject.FindGameObjectsWithTag("Health");
         if (stats.selectedPerks.IndexOf("Strange I") != -1) 
             healthPoints = 4; 
         if (stats.selectedPerks.IndexOf("Strange II") != -1) 

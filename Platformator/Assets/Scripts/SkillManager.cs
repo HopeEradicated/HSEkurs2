@@ -9,6 +9,11 @@ using UnityEngine.UI;
 
 public class SkillArray
 {
+    public SkillArray(string sskillName,string sskillDescription) {
+        skillName = sskillName;
+        skillDescription = sskillDescription;
+    }
+
     public string skillName = "";
     public string skillDescription = "";
     public string SaveToString() {
@@ -35,24 +40,20 @@ public class SkillManager : MonoBehaviour
     int curPosition = 0, curSelected = 0, rand = 0;
 
     private void Start()
-    {
+    {   
+        skillArr.Add(new SkillArray("Solid construction","Увеличивает прочности ломаемой платформы в 2 раза"));
+        skillArr.Add(new SkillArray("Low gravity","Увеличивает максимальную высоту прыжка"));
+        skillArr.Add(new SkillArray("Slide","Увеличивает горизонтальную скорость персонажа"));
+        skillArr.Add(new SkillArray("Long arms","Увеличивет дальность атаки мечем"));
+        skillArr.Add(new SkillArray("Bigger is better","Увеличивет размер снарядов, но уменьшает их скорость"));
+        skillArr.Add(new SkillArray("Smaller is better","Уменьшает размер снарядов, но увеличивает их скорость"));
         skillList[0].SelectedUpdate();
         Player = GameObject.FindGameObjectWithTag("Player");
-
-        string path = "Assets/Resources/Skills.txt";
-        
-        StreamReader reader = new StreamReader(path); 
-        while(!reader.EndOfStream) {
-            SkillArray temp = new SkillArray();
-            JsonUtility.FromJsonOverwrite(reader.ReadLine(), temp);
-            skillArr.Add(temp);
-        }
-        reader.Close();
 
         for(int i=0; i<skillList.Count; i++) {
             do {
                 rand = UnityEngine.Random.Range(1,5+1); //skillArr.Count+1);
-                if (Used.IndexOf(rand) == -1 && selectedSkill.IndexOf(skillArr[rand].skillName) == -1) break;   
+                if (Used.IndexOf(rand) == -1 && Player.GetComponent<Player>().stats.selectedSkills.IndexOf(skillArr[rand - 1].skillName) == -1) break;   
             } while (true);
             Sprite skillSprite = Resources.Load <Sprite> ("Sprites/Skills/Skill" + rand);    
             skillList[i].transform.Find("Image").GetComponent<SpriteRenderer>().sprite = skillSprite;
@@ -103,10 +104,10 @@ public class SkillManager : MonoBehaviour
 
     private void ExitButtonOnClick()
     {
-        Player.GetComponent<Player>().stats.gainedLevel -= curSelected;
         for(int i=0; i<skillList.Count; i++)
             if (skillList[i].applied) selectedSkill.Add(skillList[i].skillName);
         Player.GetComponent<Player>().UpdateSkills(selectedSkill);
+        Player.GetComponent<Player>().stats.gainedLevel -= curSelected;
         Player.GetComponent<Player>().UnloadVar();
         SceneManager.LoadScene("Game");
     }

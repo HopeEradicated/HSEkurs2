@@ -22,7 +22,7 @@ public class SpawnLevel : MonoBehaviour
             } else {
                 index++;
             }
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.1f);
         }
         Debug.Log("Finished");
         EventBus.onGenerationFinished?.Invoke();

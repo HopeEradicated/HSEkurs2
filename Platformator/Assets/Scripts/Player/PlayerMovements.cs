@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovements : MonoBehaviour
 {
@@ -43,34 +44,39 @@ public class PlayerMovements : MonoBehaviour
     }
 
     private void Update() {
-      
-        if (canJump){
-            if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space)) && !Input.GetKey(KeyCode.S)){
-                playerRb.velocity = new Vector2(playerRb.velocity.x, 0);
-                Jump();
-                canJump = false;
-            } else if (isOnWall){
-                if (playerRb.velocity.y < plSpeed){
-                    playerRb.velocity = new Vector2(playerRb.velocity.x, wallDirIndex*plSpeed);
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            Destroy(gameObject);
+            SceneManager.LoadScene("MainMenu");
+        }
+        if (EventBus.isLevelGenerated || SceneManager.GetActiveScene().name == "Training" || SceneManager.GetActiveScene().name == "Boss") {
+            if (canJump){
+                if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space)) && !Input.GetKey(KeyCode.S)){
+                    playerRb.velocity = new Vector2(playerRb.velocity.x, 0);
+                    Jump();
+                    canJump = false;
+                } else if (isOnWall){
+                    if (playerRb.velocity.y < plSpeed){
+                        playerRb.velocity = new Vector2(playerRb.velocity.x, wallDirIndex*plSpeed);
+                    }
                 }
             }
-        }
-        playerAnimator.SetFloat("velocityVertical", playerRb.velocity.y);
-        playerAnimator.SetBool("isOnWall", isOnWall);
-        
-        hDirection = Input.GetAxisRaw("Horizontal") * plSpeed;
-        if (hDirection != 0) {
+            playerAnimator.SetFloat("velocityVertical", playerRb.velocity.y);
+            playerAnimator.SetBool("isOnWall", isOnWall);
+            
+            hDirection = Input.GetAxisRaw("Horizontal") * plSpeed;
+            if (hDirection != 0) {
 
-            if (hDirection < 0) {
-                transform.rotation = Quaternion.Euler(0,0,0);
-            } else if (hDirection > 0){
-                transform.rotation = Quaternion.Euler(0,180,0);
+                if (hDirection < 0) {
+                    transform.rotation = Quaternion.Euler(0,0,0);
+                } else if (hDirection > 0){
+                    transform.rotation = Quaternion.Euler(0,180,0);
+                }
             }
-        }
-        if (isGrounded && playerRb.velocity.y == 0) {
-            playerAnimator.SetFloat("velocityHorizontal", Mathf.Abs(hDirection));
-        } else {
-            playerAnimator.SetFloat("velocityHorizontal", 0); 
+            if (isGrounded && playerRb.velocity.y == 0) {
+                playerAnimator.SetFloat("velocityHorizontal", Mathf.Abs(hDirection));
+            } else {
+                playerAnimator.SetFloat("velocityHorizontal", 0); 
+            }
         }
     }
 
@@ -81,6 +87,7 @@ public class PlayerMovements : MonoBehaviour
 
         bool isSomeBlockingObjectOnTheLeft = (raycastLeft.collider != null && (raycastLeft.collider.gameObject.tag == "Wall" || raycastLeft.collider.gameObject.tag == "Border"));
         bool isSomeBlockingObjectOnTheRight = (raycastRight.collider != null && (raycastRight.collider.gameObject.tag == "Wall" || raycastRight.collider.gameObject.tag == "Border"));
+        
         if ((isSomeBlockingObjectOnTheLeft && raycastLeft.collider.gameObject.tag == "Wall") || (isSomeBlockingObjectOnTheRight && raycastRight.collider.gameObject.tag == "Wall")) {
             isOnWall = true;
         } else {

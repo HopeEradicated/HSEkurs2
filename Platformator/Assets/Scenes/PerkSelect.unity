@@ -2297,7 +2297,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c0338db7f0ae19045ba2adcbbcf317c5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6bc3ba9627e708642b9a21e0375ebe88, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5152,6 +5152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectsSpawner: {fileID: 0}
   restartLevel: {fileID: 0}
+  loadingCanvas: {fileID: 0}
 --- !u!4 &1353430501
 Transform:
   m_ObjectHideFlags: 0

@@ -11,17 +11,19 @@ public class CameraMovement : MonoBehaviour
 
     private void Update() {
         //Проверяем, если игрок вышел за границы видимости камеры, то двигаем её в нужном направлении
-        if (playerCoords.localPosition.y > mainCam.orthographicSize + mainCam.transform.localPosition.y) { 
-            moveCameraVertical(mainCam.orthographicSize*2);
-        } 
-        if (playerCoords.localPosition.y <  mainCam.transform.localPosition.y - mainCam.orthographicSize){
-            moveCameraVertical(-2*mainCam.orthographicSize);
-        }
-        if (playerCoords.localPosition.x > horizontalDistance + mainCam.transform.localPosition.x) { 
-            moveCameraHorizontal(2*horizontalDistance);
-        } 
-        if (playerCoords.localPosition.x <  mainCam.transform.localPosition.x - horizontalDistance){
-            moveCameraHorizontal(-2*horizontalDistance);
+        if (playerCoords != null) {
+            if (playerCoords.localPosition.y > mainCam.orthographicSize + mainCam.transform.localPosition.y) { 
+                moveCameraVertical(mainCam.orthographicSize*2);
+            } 
+            if (playerCoords.localPosition.y <  mainCam.transform.localPosition.y - mainCam.orthographicSize){
+                moveCameraVertical(-2*mainCam.orthographicSize);
+            }
+            if (playerCoords.localPosition.x > horizontalDistance + mainCam.transform.localPosition.x) { 
+                moveCameraHorizontal(2*horizontalDistance);
+            } 
+            if (playerCoords.localPosition.x <  mainCam.transform.localPosition.x - horizontalDistance){
+                moveCameraHorizontal(-2*horizontalDistance);
+            }
         }
     }
 

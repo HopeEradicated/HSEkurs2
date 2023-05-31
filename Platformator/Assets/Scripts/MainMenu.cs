@@ -13,8 +13,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Button ExitButton;
 
     private int levelsToBoss = 5;
-    private string pathPS = "Assets/Resources/PlayerStats.txt";
-    private string pathGS = "Assets/Resources/GameSP.txt";
+    private string pathPS = Application.dataPath + "/Resources/PlayerStats.txt";
+    private string pathGS = Application.dataPath + "/Resources/GameSP.txt";
 
     private void Start() {
         TrainingButton.onClick.AddListener(StartTraining);
@@ -28,8 +28,15 @@ public class MainMenu : MonoBehaviour
     }
 
     private void StartNewGame() {
-        File.Delete(pathPS);
-        File.Delete(pathGS);
+        if (File.Exists(pathPS))
+            File.Delete(pathPS);
+        else
+            File.Create(pathPS).Close();
+
+        if (File.Exists(pathGS))
+            File.Delete(pathGS);
+        else
+            File.Create(pathGS).Close();
         SceneManager.LoadScene("Game");
     }
 

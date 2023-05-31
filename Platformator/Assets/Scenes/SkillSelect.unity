@@ -1022,6 +1022,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skill
       objectReference: {fileID: 0}
+    - target: {fileID: 2458927792897664220, guid: 40361f909e9840d40b5571a208af15a3, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 6.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2458927792897664220, guid: 40361f909e9840d40b5571a208af15a3, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 40361f909e9840d40b5571a208af15a3, type: 3}
@@ -1657,11 +1665,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2458927792897664220, guid: 40361f909e9840d40b5571a208af15a3, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.09
+      value: 6.2
       objectReference: {fileID: 0}
     - target: {fileID: 2458927792897664220, guid: 40361f909e9840d40b5571a208af15a3, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.065
+      value: 4.2
       objectReference: {fileID: 0}
     - target: {fileID: 2458927792897664220, guid: 40361f909e9840d40b5571a208af15a3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1871,6 +1879,14 @@ PrefabInstance:
     - target: {fileID: 1642128136415104989, guid: 40361f909e9840d40b5571a208af15a3, type: 3}
       propertyPath: m_Name
       value: Skill (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2458927792897664220, guid: 40361f909e9840d40b5571a208af15a3, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 6.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2458927792897664220, guid: 40361f909e9840d40b5571a208af15a3, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4.2
       objectReference: {fileID: 0}
     - target: {fileID: 2458927792897664220, guid: 40361f909e9840d40b5571a208af15a3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2159,6 +2175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectsSpawner: {fileID: 0}
   restartLevel: {fileID: 0}
+  loadingCanvas: {fileID: 0}
 --- !u!4 &1353430501
 Transform:
   m_ObjectHideFlags: 0

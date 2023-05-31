@@ -12,6 +12,9 @@ public class CollectableItem : MonoBehaviour
             GameObject Player = GameObject.FindGameObjectWithTag("Player");
             if (Player.GetComponent<Player>().stats.selectedPerks.IndexOf("More XP") != -1) 
                 Player.GetComponent<Player>().ChangeExperiencePoints(10);
+            if (Player.GetComponent<Player>().stats.selectedPerks.IndexOf("More gold") != -1) 
+                Player.GetComponent<Player>().stats.money += 1;
+            Player.GetComponent<Player>().stats.money += 1;
             Player.GetComponent<Player>().ChangeExperiencePoints(10);
             audioSource.Play();
             foodSR.enabled = false;
