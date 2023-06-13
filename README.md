@@ -1,2 +1,2 @@
 # HSEkurs2
-Unity game
+Unity platformer game
